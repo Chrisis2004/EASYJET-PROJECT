@@ -1,0 +1,23 @@
+@startuml
+!theme mars
+class getInputFromKeyboard
+{
+#ConsoleInput
++getInputFromKeyboard()
++int getInt()
++long getLong()
++double getDouble()
++float getFloat()
++boolean getBoolean()
++byte getByte()
++char getChar()
++String getString()
++String getMail()
++void mailValidation(String mail)
++boolean {static} mailSyntaxCheck(String mail)
++String getPassword()
++void passwordValidation(String password)
++boolean {static} passwordSyntaxCheck(String password)
++void clearConsole()
+}
+@enduml
