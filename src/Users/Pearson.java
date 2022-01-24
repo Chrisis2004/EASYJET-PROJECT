@@ -192,7 +192,7 @@ public class Pearson {
             }
         }
         else 
-            System.out.println("Login fallito\n");
+            System.out.println("Login failed\n");
     }
 
     //---------------------------------------------------------------------------------------------------------------
