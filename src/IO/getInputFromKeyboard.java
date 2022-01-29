@@ -270,4 +270,11 @@ public class getInputFromKeyboard {
         System.out.print("\033[H\033[2J");
         System.out.flush();
     }
+
+    public void printLogo() throws IOException{
+        FileIO fileReader = new FileIO("logo.txt");
+        String[] logoToPrint = fileReader.readFromFile();
+        for (int i=0; i<logoToPrint.length; i++)
+            System.out.println(logoToPrint[i]);
+    }
 }

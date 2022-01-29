@@ -1,6 +1,8 @@
 package Users;
 
 import java.io.IOException;
+
+import IO.getInputFromKeyboard;
 import IO.mailException;
 import IO.passwordException;
 import DB.Users.IOUsers;
@@ -12,19 +14,20 @@ public class Pearson {
     private String password;
     private String userType;
 
-    private IOUsers usersManager;
-    IO.getInputFromKeyboard input = new IO.getInputFromKeyboard();
+    IOUsers usersManager;
+    getInputFromKeyboard input = new IO.getInputFromKeyboard();
 
     public Pearson() throws IOException {
         usersManager = new IOUsers();
     }
 
-    public Pearson(String name, String surname, String mail, String password) throws IOException {
+    public Pearson(String name, String surname, String mail, String password, String userType) throws IOException {
         usersManager = new IOUsers();
         this.name = name;
         this.surname = surname;
         this.mail = mail;
         this.password = password;
+        this.userType = userType;
     }
 
     public String getName() {
@@ -59,7 +62,7 @@ public class Pearson {
         this.password = password;
     }
 
-    public void logIn() throws passwordException, IOException, mailException {
+    public boolean logIn() throws passwordException, IOException, mailException {
         input.clearConsole();
 
         System.out.print("Insert mail: ");
@@ -68,6 +71,8 @@ public class Pearson {
         String password = input.getPassword();
 
         verifyCredentials(mail, password);
+        if ()
+        return false;
     }
 
     public void logIn(String mail) throws passwordException, IOException, mailException {
@@ -156,7 +161,7 @@ public class Pearson {
         }
     }
 
-    public void verifyCredentials(String mail, String password) throws IOException {
+    public boolean verifyCredentials(String mail, String password) throws IOException {
         int idUsers = usersManager.verifyMailUser(mail);
         if (idUsers != -1) {
             if (usersManager.verifyPasswordUser(mail, password)) {
@@ -168,14 +173,20 @@ public class Pearson {
                     this.userType = "Costumer";
                 } else if (usersManager.verifyUserType(idUsers).equals("A")) {
                     this.userType = "Administrator";
-                } else
+                } else {
                     System.out.println("Login failed\n");
+                    return false;
+                }
                 System.out.println("LogIn successful\n" + toString());
+                return true;
             } else {
                 System.out.println("Login failed\n");
+                return false;
             }
-        } else
+        } else{
             System.out.println("Login failed\n");
+            return false;
+        }    
     }
 
     public String toString() {

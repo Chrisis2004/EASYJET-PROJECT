@@ -119,5 +119,15 @@ public class FileIO {
         String toReturn = fileContent[nLine][nSplit];
             return toReturn;
     }
+    public void delateLineFromCSV(int nLineToDelate) throws IOException{
+        BufferedWriter fileWriter = new BufferedWriter(new FileWriter(this.file));
+        for (int i=0;i<this.nLines;i++){
+            if (this.nLines == nLineToDelate)
+                continue;
+            fileWriter.write(fileContent[i]);
+            fileWriter.write("\n");
+        }
+        fileWriter.close();
+    }
 
 }

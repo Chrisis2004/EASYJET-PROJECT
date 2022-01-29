@@ -1,8 +1,4 @@
-import java.io.IOException;
-
-import IO.FileIO;
 import IO.getInputFromKeyboard;
-
 public class App {
     public static void main(String[] args) throws Exception {
         getInputFromKeyboard input = new getInputFromKeyboard();
@@ -10,17 +6,17 @@ public class App {
 
         input.clearConsole();
 
-        printLogo();
+        input.printLogo();
         System.out.println("Choose the action to do: ");
         System.out.println("1: logIn");
         System.out.println("2: registration");
         System.out.println("3. exit");
-        System.out.print("Coose: ");
+        System.out.print("Choose: ");
         int choose = input.getInt();
 
         switch(choose){
             case 1:
-            pearson.logIn();
+                pearson.logIn();
                 break;
             case 2:
                 pearson.costumerRegistration();
@@ -30,11 +26,7 @@ public class App {
         
         
     }
-    public static void printLogo() throws IOException{
-        FileIO fileReader = new FileIO("logo.txt");
-        String[] logoToPrint = fileReader.readFromFile();
-        for (int i=0; i<logoToPrint.length; i++)
-            System.out.println(logoToPrint[i]);
-    }
+    
+    
 }
 
