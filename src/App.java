@@ -12,7 +12,7 @@ public class App {
 
         input.printLogo();
         System.out.println("Choose the action to do: ");
-        System.out.println("1: logIn");
+        System.out.println("1: login");
         System.out.println("2: registration");
         System.out.println("3. exit");
         System.out.print("Choose: ");

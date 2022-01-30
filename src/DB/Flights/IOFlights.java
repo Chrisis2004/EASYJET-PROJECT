@@ -12,10 +12,20 @@ public class IOFlights {
     }
 
     getInputFromKeyboard input = new getInputFromKeyboard();
-
-    public void printFlights() throws IOException{
-        String toPrint[][] = fileFlights.readFromCSV(";");
-        
+    public void printFlights() throws IOException
+    {
+    	String fileContent[][] = fileFlights.readFromCSV(";");
+    	String[] toPrint = new String[7];
+    	for(int i=0; i<fileContent.length; i++)
+    	{
+    		for(int z=0; z<7; z++)
+    			toPrint[z] = fileContent[i][z];
+    		System.out.println("Flight: " + toPrint[0]);
+    		System.out.println("Departure: " + toPrint[1] + " - " + toPrint[2]);
+    		System.out.println("Arrival: " + toPrint[3] + " - " + toPrint[4]);
+    		System.out.println("Prize: " + toPrint[5]);
+    		System.out.println("Seats: " + toPrint[6]);
+    	}
     }
 
     public int searchFlights(String idFlight){return 1;}
