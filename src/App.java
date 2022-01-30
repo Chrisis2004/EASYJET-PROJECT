@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 import IO.getInputFromKeyboard;
 public class App {
     public static Users.Pearson pearson;
@@ -19,20 +21,26 @@ public class App {
         switch(choose){
             case 1:
                 fistActionDone = pearson.logIn();
+                application();
                 break;
             case 2:
                 fistActionDone = pearson.costumerRegistration();
+                application();
                 break;
             default: 
         }
     }
-    public static void application(){
+    public static void application() throws IOException{
         if ((fistActionDone)&&(pearson.getUserType().equals("Costumer"))){
-            
+            //costruttore costumer()
         }
-        else if ((fistActionDone)&&(pearson.getUserType().equals("Costumer"))){
+        else if ((fistActionDone)&&(pearson.getUserType().equals("Administrator"))){
+            Users.Administrator admin = new Users.Administrator(pearson.getName(), pearson.getSurname(), pearson.getMail(), pearson.getPassword(), pearson.getUserType());
+            admin.menuAdmin();
         }
-        else {}
+        else {
+            System.out.println("Something was wrong sorry try to restart the application");
+        }
     }
     
     

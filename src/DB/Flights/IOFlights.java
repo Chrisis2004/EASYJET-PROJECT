@@ -5,15 +5,18 @@ import IO.FileIO;
 import IO.getInputFromKeyboard;
 
 public class IOFlights {
-    private FileIO fileUsers;
+    private FileIO fileFlights;
 
     public IOFlights() throws IOException {
-        fileUsers = new FileIO("src\\DB\\Flights\\Flights.CSV");
+        fileFlights = new FileIO("src\\DB\\Flights\\Flights.CSV");
     }
 
     getInputFromKeyboard input = new getInputFromKeyboard();
 
-    public void printFlights(){}
+    public void printFlights() throws IOException{
+        String toPrint[][] = fileFlights.readFromCSV(";");
+        
+    }
 
     public int searchFlights(String idFlight){return 1;}
     public int searchFlights(String departure , String arrival){return 1;}
@@ -25,7 +28,7 @@ public class IOFlights {
         System.out.print("Insert ID of the flight: ");
         String idFlight = input.getString();
         int flightToDelate = searchFlights(idFlight);
-        fileUsers.delateLineFromCSV(flightToDelate);
+        fileFlights.delateLineFromCSV(flightToDelate);
     }
     public void addFlight() throws IOException{
         //nicola

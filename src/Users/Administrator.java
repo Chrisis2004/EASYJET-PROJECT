@@ -17,11 +17,11 @@ public class Administrator extends Pearson {
     }
 
     public void menuAdmin() throws IOException {
-
-        input.clearConsole();
         boolean exitToMenu = false;
         int choose;
         while (exitToMenu == false) {
+            input.clearConsole();
+
             System.out.println("Hi " + getName() + getSurname() + " choose the action that you want do: ");
             System.out.println("0. See all flight");
             System.out.println("1. Modify a flight");
@@ -52,13 +52,14 @@ public class Administrator extends Pearson {
                     break;
                 case 7:
                     break;
+            
             }
 
             System.out.print(
                     "Do you need something again?\n If you write \"yes\" you will return to the menu\n else write all other words for exit.");
             String menuExit = input.getString();
             if (!menuExit.equals("yes"))
-                exitToMenu = false;
+                exitToMenu = true;
         }
     }
 
