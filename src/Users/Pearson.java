@@ -61,6 +61,12 @@ public class Pearson {
     public void setPassword(String password) {
         this.password = password;
     }
+    public String getUserType() {
+        return userType;
+    }
+    public void setUserType(String userType) {
+        this.userType = userType;
+    }
 
     public boolean logIn() throws passwordException, IOException, mailException {
         input.clearConsole();
@@ -70,26 +76,24 @@ public class Pearson {
         System.out.print("Insert password: ");
         String password = input.getPassword();
 
-        verifyCredentials(mail, password);
-        if ()
-        return false;
+        return verifyCredentials(mail, password);
     }
 
-    public void logIn(String mail) throws passwordException, IOException, mailException {
+    public boolean logIn(String mail) throws passwordException, IOException, mailException {
         input.clearConsole();
 
         System.out.print("Insert mail: " + mail + "\n");
         System.out.print("Insert password: ");
         String password = input.getPassword();
 
-        verifyCredentials(mail, password);
+        return verifyCredentials(mail, password);
     }
 
-    public void logIn(String mail, String password) throws passwordException, IOException, mailException {
-        verifyCredentials(mail, password);
+    public boolean logIn(String mail, String password) throws passwordException, IOException, mailException {
+        return verifyCredentials(mail, password);
     }
 
-    public void costumerRegistration() throws passwordException, IOException, mailException {
+    public boolean costumerRegistration() throws passwordException, IOException, mailException, InterruptedException {
         input.clearConsole();
         System.out.print("Insert name: ");
         String name = input.getString();
@@ -103,7 +107,6 @@ public class Pearson {
 
         if (idUser != -1) {
             while (usersManager.verifyMailUser(mail) != -1) {
-                boolean mustGoOut = false;
                 if (usersManager.verifyUserType(idUser).equals("C")) {
                     input.clearConsole();
                     System.out.println(
@@ -118,28 +121,22 @@ public class Pearson {
 
                     switch (choose) {
                         case 1:
-                            logIn(mail);
-                            mustGoOut = true;
                             reinsertAppened = false;
-                            break;
+                            return logIn(mail);
                         case 2:
                             System.out.print("Insert old password: ");
                             String oldPassword = input.getPassword();
                             System.out.print("Insert new password: ");
                             String newPassword = input.getPassword();
                             usersManager.changePasswordUser(idUser, oldPassword, newPassword);
-                            logIn(mail, newPassword);
-                            mustGoOut = true;
                             reinsertAppened = false;
-                            break;
+                            return logIn(mail, newPassword);
                         case 3:
                             input.clearConsole();
                             System.out.print("Reinsert mail: ");
                             mail = input.getMail();
                             break;
                     }
-                    if (mustGoOut)
-                        break;
                 } else if (usersManager.verifyUserType(idUser).equals("A")) {
                     input.clearConsole();
                     System.out.println(" !!! Mail insered has already assigned to an administrator !!!");
@@ -151,14 +148,11 @@ public class Pearson {
         if (reinsertAppened) {
             System.out.print("Insert password: ");
             String password = input.getPassword();
-
-            this.name = name;
-            this.surname = surname;
-            this.mail = mail;
-            this.password = password;
-            this.userType = "Costumer";
             usersManager.addUser(name, surname, mail, password, "C");
+            return logIn(mail,password);
         }
+        else 
+            return false;
     }
 
     public boolean verifyCredentials(String mail, String password) throws IOException {
@@ -174,19 +168,15 @@ public class Pearson {
                 } else if (usersManager.verifyUserType(idUsers).equals("A")) {
                     this.userType = "Administrator";
                 } else {
-                    System.out.println("Login failed\n");
                     return false;
                 }
-                System.out.println("LogIn successful\n" + toString());
                 return true;
             } else {
-                System.out.println("Login failed\n");
                 return false;
             }
-        } else{
-            System.out.println("Login failed\n");
+        } else {
             return false;
-        }    
+        }
     }
 
     public String toString() {

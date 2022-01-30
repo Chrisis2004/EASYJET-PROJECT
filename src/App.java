@@ -1,8 +1,10 @@
 import IO.getInputFromKeyboard;
 public class App {
+    public static Users.Pearson pearson;
+    public static boolean fistActionDone;
     public static void main(String[] args) throws Exception {
         getInputFromKeyboard input = new getInputFromKeyboard();
-        Users.Pearson pearson = new Users.Pearson();
+        pearson = new Users.Pearson();
 
         input.clearConsole();
 
@@ -16,15 +18,21 @@ public class App {
 
         switch(choose){
             case 1:
-                pearson.logIn();
+                fistActionDone = pearson.logIn();
                 break;
             case 2:
-                pearson.costumerRegistration();
+                fistActionDone = pearson.costumerRegistration();
                 break;
             default: 
         }
-        
-        
+    }
+    public static void application(){
+        if ((fistActionDone)&&(pearson.getUserType().equals("Costumer"))){
+            
+        }
+        else if ((fistActionDone)&&(pearson.getUserType().equals("Costumer"))){
+        }
+        else {}
     }
     
     

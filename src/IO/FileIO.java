@@ -21,7 +21,6 @@ public class FileIO {
         }
         
     }
-
     public int findLineAmount() throws IOException {
         LineNumberReader lineNumberReader = new LineNumberReader(new FileReader(file));
         lineNumberReader.skip(Long.MAX_VALUE);
@@ -30,10 +29,11 @@ public class FileIO {
         return totalLines;
     } 
     public String[] readFromFile() throws IOException{
-        if (this.nLines!=0) {
+        int nLines = findLineAmount();
+        if (nLines!=0) {
             BufferedReader fileReader = new BufferedReader(new FileReader(this.file));
-            String[] linesFromFile= new String[this.nLines];
-            for(int i=0; i<this.nLines;i++)
+            String[] linesFromFile= new String[nLines];
+            for(int i=0; i<nLines;i++)
                 linesFromFile[i]=fileReader.readLine();
             fileReader.close();
             return linesFromFile;
@@ -56,9 +56,10 @@ public class FileIO {
     public String[][] readFromCSV(String separatorChar) throws IOException{
         BufferedReader fileReader = new BufferedReader(new FileReader(this.file));
         int split = howManySplit(separatorChar);
-        String[][] result = new String[this.nLines][split];
-        if (this.nLines!=0) {
-            for(int z=0; z<this.nLines;z++){
+        int nLines = findLineAmount();
+        String[][] result = new String[nLines][split];
+        if (nLines!=0) {
+            for(int z=0; z<nLines;z++){
                 String[] inLines = fileReader.readLine().split(separatorChar);
                 for (int i=0;i<split;i++) {
                     result[z][i] = inLines[i];
@@ -79,6 +80,7 @@ public class FileIO {
                 fileWriter.write(toWrite[i][z] + separatorChar);
             fileWriter.write("\n");
         }
+        fileWriter.flush();
         fileWriter.close();
     }
 
@@ -96,12 +98,13 @@ public class FileIO {
         for (int i=0;i<nLines;i++)
             for(int z=0;z<nSplits;z++)
                 fileWriter.write(toWrite[i][z] + separatorChar);
+        fileWriter.flush();
         fileWriter.close();
     }
 
     public int thereIsOnCSV(String toSearch, int splitToSearch) throws IOException{
         String[][] fileContent = readFromCSV(";");
-        for (int i=0;i<nLines;i++){
+        for (int i=0;i<findLineAmount();i++){
             if(fileContent[i][splitToSearch].equals(toSearch))
                 return i;
         }
@@ -110,9 +113,7 @@ public class FileIO {
     public boolean thereIsInLineCSV(String toSearch, int nLine, int splitToSearch) throws IOException
     {
         String[][] fileContent = readFromCSV(";");
-        if (fileContent[nLine][splitToSearch].equals(toSearch))
-            return true;
-        return false;
+        return fileContent[nLine][splitToSearch].equals(toSearch);
     }
     public String getFromCSV (int nLine, int nSplit) throws IOException{
         String[][] fileContent = readFromCSV(";");

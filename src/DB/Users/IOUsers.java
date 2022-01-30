@@ -56,17 +56,11 @@ public class IOUsers {
     }
 
     public int verifyMailUser(String mail) throws IOException {
-        if (fileUsers.thereIsOnCSV(mail, 2) != -1)
-            return fileUsers.thereIsOnCSV(mail, 2);
-        else
-            return -1;
+        return fileUsers.thereIsOnCSV(mail, 2);
     }
 
     public boolean verifyPasswordUser(String mail, String password) throws IOException {
-        if (fileUsers.thereIsInLineCSV(password, verifyMailUser(mail), 3))
-            return true;
-        else
-            return false;
+        return fileUsers.thereIsInLineCSV(password, verifyMailUser(mail), 3);
     }
 
     public String verifyUserType(int nLine) throws IOException {
