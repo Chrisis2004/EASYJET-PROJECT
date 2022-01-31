@@ -28,8 +28,29 @@ public class IOFlights {
     	}
     }
 
-    public int searchFlights(String idFlight){return 1;}
-    public int searchFlights(String departure , String arrival){return 1;}
+    public int searchFlights(String idFlight) throws IOException{
+    	String fileContent[][] = fileFlights.readFromCSV(";");
+        if(fileContent=!null){
+            for(int i=0; i<fileContent.length; i++){
+                if(fileContent[i][0]==idFlight) {
+                    return i;
+                }
+    		}
+        }
+    	return -1;
+    }
+    
+    public int searchFlights(String departure , String arrival) throws IOException{
+    	String fileContent[][] = fileFlights.readFromCSV(";");
+        if(fileContent=!null){
+    	    for(int i=0; i<fileContent.length; i++){
+    		    if(fileContent[i][1] == departure && fileContent[i][2] ==arrival) {
+    			    return i;
+    			}
+    		}
+        }
+    	return -1;
+    }
 
     public void modifyFlight() throws IOException{
         //nicola
