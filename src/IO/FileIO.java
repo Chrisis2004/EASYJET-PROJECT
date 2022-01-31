@@ -121,9 +121,11 @@ public class FileIO {
             return toReturn;
     }
     public void delateLineFromCSV(int nLineToDelate) throws IOException{
+        String[] fileContent = readFromFile();
+        int nLines = findLineAmount();
         BufferedWriter fileWriter = new BufferedWriter(new FileWriter(this.file));
-        for (int i=0;i<this.nLines;i++){
-            if (this.nLines == nLineToDelate)
+        for (int i=0;i<nLines;i++){
+            if (i==nLineToDelate)
                 continue;
             fileWriter.write(fileContent[i]);
             fileWriter.write("\n");

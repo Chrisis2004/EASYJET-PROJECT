@@ -39,20 +39,24 @@ public class Administrator extends Pearson {
                     flightsManager.printFlights();
                     break;
                 case 1:
+                    flightsManager.modifyFlight();
                     break;
                 case 2:
                     flightsManager.delateFlight();
                     break;
                 case 3:
+                    flightsManager.addFlight();
                     break;
                 case 4:
+                    adminRegistration();
                     break;
                 case 5:
+                    //funzione dei biglietti
                     break;
                 case 6:
+                    //funzione che stampa un volo
                     break;
-                case 7:
-                    break;
+                default:
             
             }
 
