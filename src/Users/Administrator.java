@@ -36,6 +36,7 @@ public class Administrator extends Pearson {
 
             switch (choose) {
                 case 0:
+                    flightsManager.printFlights();
                     break;
                 case 1:
                     break;
