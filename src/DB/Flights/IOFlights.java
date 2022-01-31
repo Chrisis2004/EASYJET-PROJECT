@@ -114,7 +114,7 @@ public class IOFlights {
         add[0][6]=ticket;
 
         
-        fileFlights.writeOnCSV(add,fileFlights.findLineAmount()+1,fileFlights.howManySplit(";"),";");
+        fileFlights.writeOnCSVAddOnly(add, 1, 7, ";");
     }
 
 }
