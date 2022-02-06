@@ -236,7 +236,7 @@ public class getInputFromKeyboard {
         } catch (passwordException e) {
             passwordToReturn = e.passwordError(passwordToReturn);
         }
-        return passwordToReturn;
+        return passwordCripter(passwordToReturn,"password");
     }
 
     public void passwordValidation(String password) throws passwordException {
@@ -267,13 +267,13 @@ public class getInputFromKeyboard {
                 }
             }
             for (int i = 0; i < upperCase.length; i++) {
-                if (password.indexOf(number[i]) != -1) {
+                if (password.indexOf(upperCase[i]) != -1) {
                     validPassword[1] = true;
                     break;
                 }
             }
             for (int i = 0; i < specialChar.length; i++) {
-                if (password.indexOf(number[i]) != -1) {
+                if (password.indexOf(specialChar[i]) != -1) {
                     validPassword[2] = true;
                     break;
                 }
