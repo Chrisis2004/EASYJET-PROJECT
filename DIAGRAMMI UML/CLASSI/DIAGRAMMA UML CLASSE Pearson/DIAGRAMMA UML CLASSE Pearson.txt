@@ -1,0 +1,29 @@
+@startuml
+!theme mars
+class Pearson {
+  -String name
+  -String surname
+  -String mail
+  -String password
+  -String userType
+  +IOUsers usersManager
+  +Pearson()
+  +Pearson(String name, String surname, String mail, String password)
+  +String getName()
+  +String getSurname()
+  +String getMail()
+  +String getPassword()
+  +void setName(String name)
+  +void setSurname(String surname)
+  +void setMail(String mail)
+  +void setPassword(String password)
+  +String getUserType()
+  +void setUserType(String userType)
+  +void logIn()
+  +void logIn(String mail)
+  +void logIn(String mail, String password)
+  +void costumerRegistration()
+  +void verifyCredentials(String mail, String password)
+  +String toString()
+}
+@enduml
