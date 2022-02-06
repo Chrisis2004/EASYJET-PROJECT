@@ -1,0 +1,9 @@
+@startuml
+!theme mars
+class mailException
+{
+  +getInputFromKeyboard input
+  +mailException()
+  +void mailError(String mail)	
+}
+@enduml
