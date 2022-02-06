@@ -247,48 +247,69 @@ public class getInputFromKeyboard {
 
     public static boolean passwordSyntaxCheck(String password) {
         // return true if and only if password:
-        // 1. have at least eight characters.
-        // 2. consists of only letters and digits.
-        // 3. must contain at least two digits.
+        // 1. have at least 8 characters
+        // 2. have at least a number
+        // 3. have at least an uppercase character
+        // 4. have at least a special charcater
         if (password.length() < 8) {
             return false;
-        } else {
-            char c;
-            int count = 1;
-            for (int i = 0; i < password.length() - 1; i++) {
-                c = password.charAt(i);
-                if (!Character.isLetterOrDigit(c)) {
-                    return false;
-                } else if (Character.isDigit(c)) {
-                    if (count < 2) {
-                        return false;
+        } else
+        {
+            boolean validPassword[] = {false,false,false};
+            String number[] = {"0","1","2","3","4","5","6","7","8","9"};
+            String upperCase[] = {"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"};
+            String specialChar[] = {"!","£","$","%","&","/","(",")","=","?","^","€","[","]","+","*","@","#","|","\\"," - ","_ "," < "," > ","°","§"};
+            for (int i = 0; i < number.length; i++)
+            {
+                if (password.indexOf(number[i]) != -1)
+                    {
+                        validPassword[0] = true;
+                        break;
                     }
                 }
+                for (int i = 0; i < upperCase.length; i++)
+                {
+                    if (password.indexOf(number[i]) != -1)
+                    {
+                        validPassword[1] = true;
+                        break;
+                    }
+                }
+            for (int i = 0; i < specialChar.length; i++)
+            {
+                if (password.indexOf(number[i]) != -1)
+                {
+                    validPassword[2] = true;
+                    break;
+                }
+            }
+                if (validPassword[0] && validPassword[1] && validPassword[2])
+                    return true;
+                else
+                    return false;
             }
         }
-        return true;
-    }
 
     public void clearConsole() {
         System.out.print("\033[H\033[2J");
         System.out.flush();
     }
 
-    public void printLogo() throws IOException{
+    public void printLogo() throws IOException {
         FileIO fileReader = new FileIO("logo.txt");
         String[] logoToPrint = fileReader.readFromFile();
-        for (int i=0; i<logoToPrint.length; i++)
+        for (int i = 0; i < logoToPrint.length; i++)
             System.out.println(logoToPrint[i]);
     }
 
-    public String passwordCripter(String passwordToHash, String salt){
+    public String passwordCripter(String passwordToHash, String salt) {
         String generatedPassword = null;
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-512");
             md.update(salt.getBytes(StandardCharsets.UTF_8));
             byte[] bytes = md.digest(passwordToHash.getBytes(StandardCharsets.UTF_8));
             StringBuilder sb = new StringBuilder();
-            for(int i=0; i< bytes.length ;i++){
+            for (int i = 0; i < bytes.length; i++) {
                 sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
             }
             generatedPassword = sb.toString();
