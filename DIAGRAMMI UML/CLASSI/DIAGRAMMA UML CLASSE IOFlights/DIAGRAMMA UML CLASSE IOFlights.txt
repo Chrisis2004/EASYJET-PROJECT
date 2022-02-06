@@ -1,0 +1,14 @@
+@startuml
+!theme mars
+class IOFlights
+{
+-FileIO fileFlights
++IOFlights()
++void printFlights()
++int searchFlights(String idFlight)
++int searchFlights(String departure , String arrival)
++void modifyFlight()
++void delateFlight()
++void addFlight()
+}
+@enduml
