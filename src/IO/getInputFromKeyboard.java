@@ -253,42 +253,37 @@ public class getInputFromKeyboard {
         // 4. have at least a special charcater
         if (password.length() < 8) {
             return false;
-        } else
-        {
-            boolean validPassword[] = {false,false,false};
-            String number[] = {"0","1","2","3","4","5","6","7","8","9"};
-            String upperCase[] = {"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"};
-            String specialChar[] = {"!","£","$","%","&","/","(",")","=","?","^","€","[","]","+","*","@","#","|","\\"," - ","_ "," < "," > ","°","§"};
-            for (int i = 0; i < number.length; i++)
-            {
-                if (password.indexOf(number[i]) != -1)
-                    {
-                        validPassword[0] = true;
-                        break;
-                    }
+        } else {
+            boolean validPassword[] = { false, false, false };
+            String number[] = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+            String upperCase[] = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q",
+                    "R", "S", "T", "U", "V", "W", "X", "Y", "Z" };
+            String specialChar[] = { "!", "£", "$", "%", "&", "/", "(", ")", "=", "?", "^", "€", "[", "]", "+", "*",
+                    "@", "#", "|", "\\", " - ", "_ ", " < ", " > ", "°", "§" };
+            for (int i = 0; i < number.length; i++) {
+                if (password.indexOf(number[i]) != -1) {
+                    validPassword[0] = true;
+                    break;
                 }
-                for (int i = 0; i < upperCase.length; i++)
-                {
-                    if (password.indexOf(number[i]) != -1)
-                    {
-                        validPassword[1] = true;
-                        break;
-                    }
+            }
+            for (int i = 0; i < upperCase.length; i++) {
+                if (password.indexOf(number[i]) != -1) {
+                    validPassword[1] = true;
+                    break;
                 }
-            for (int i = 0; i < specialChar.length; i++)
-            {
-                if (password.indexOf(number[i]) != -1)
-                {
+            }
+            for (int i = 0; i < specialChar.length; i++) {
+                if (password.indexOf(number[i]) != -1) {
                     validPassword[2] = true;
                     break;
                 }
             }
-                if (validPassword[0] && validPassword[1] && validPassword[2])
-                    return true;
-                else
-                    return false;
-            }
+            if (validPassword[0] && validPassword[1] && validPassword[2])
+                return true;
+            else
+                return false;
         }
+    }
 
     public void clearConsole() {
         System.out.print("\033[H\033[2J");
