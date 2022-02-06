@@ -17,12 +17,12 @@ public class App {
         System.out.println("3. exit");
         System.out.print("Choose: ");
         int choose = input.getInt();
-
+        
         switch(choose){
             case 1:
-                fistActionDone = pearson.logIn();
-                application();
-                break;
+            fistActionDone = pearson.logIn();
+            application();
+            break;
             case 2:
                 fistActionDone = pearson.costumerRegistration();
                 application();
@@ -32,7 +32,8 @@ public class App {
     }
     public static void application() throws IOException{
         if ((fistActionDone)&&(pearson.getUserType().equals("Costumer"))){
-            //costruttore costumer()
+            Users.Costumer costumer = new Users.Costumer(pearson.getName(), pearson.getSurname(), pearson.getMail(), pearson.getPassword(), pearson.getUserType());
+            costumer.menuCostumer();
         }
         else if ((fistActionDone)&&(pearson.getUserType().equals("Administrator"))){
             Users.Administrator admin = new Users.Administrator(pearson.getName(), pearson.getSurname(), pearson.getMail(), pearson.getPassword(), pearson.getUserType());

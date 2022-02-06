@@ -1,7 +1,6 @@
 package Users;
 
 import java.io.IOException;
-
 import DB.Flights.IOFlights;
 import IO.getInputFromKeyboard;
 
@@ -22,7 +21,7 @@ public class Administrator extends Pearson {
         while (exitToMenu == false) {
             input.clearConsole();
 
-            System.out.println("Hi " + getName() + getSurname() + " choose the action that you want do: ");
+            System.out.println("Hi " + getName() + " " + getSurname() + " choose the action that you want do: ");
             System.out.println("0. See all flight");
             System.out.println("1. Modify a flight");
             System.out.println("2. Delate a flight");
