@@ -1,0 +1,7 @@
+@startuml
+!theme mars
+class Costumer
+{
+  +Costumer(String name, String surname, String mail, String password, String userType)	
+}
+@enduml
