@@ -1,6 +1,8 @@
 import java.io.IOException;
 
 import IO.getInputFromKeyboard;
+import IO.mailException;
+import IO.passwordException;
 public class App {
     public static Users.Pearson pearson;
     public static boolean fistActionDone;
@@ -30,7 +32,7 @@ public class App {
             default: 
         }
     }
-    public static void application() throws IOException{
+    public static void application() throws IOException, passwordException, mailException{
         if ((fistActionDone)&&(pearson.getUserType().equals("Costumer"))){
             //costruttore costumer()
         }

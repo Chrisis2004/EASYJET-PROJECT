@@ -54,6 +54,11 @@ public class IOUsers {
         String toReturn = file[nLine][3];
         return toReturn;
     }
+    public String getUserType(int nLine) throws IOException {
+        String[][] file = fileUsers.readFromCSV(";");
+        String toReturn = file[nLine][4];
+        return toReturn;
+    }
 
     public int verifyMailUser(String mail) throws IOException {
         return fileUsers.thereIsOnCSV(mail, 2);
@@ -100,6 +105,12 @@ public class IOUsers {
         toWrite[0][4] = userType;
 
         fileUsers.writeOnCSVAddOnly(toWrite, 1, 5, ";");
+    }
+
+    public void changeUserType(int nLineUser, String userType) throws IOException{
+        String[][] file = fileUsers.readFromCSV(";");
+        file[nLineUser][4] = userType;
+        fileUsers.writeOnCSV(file, fileUsers.findLineAmount(), fileUsers.howManySplit(";"), ";");
     }
 
 }
