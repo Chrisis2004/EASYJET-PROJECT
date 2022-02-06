@@ -1,6 +1,7 @@
 package DB.Flights;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import IO.FileIO;
 import IO.getInputFromKeyboard;
 
@@ -55,18 +56,96 @@ public class IOFlights {
         String idFlight = input.getString();
         int id = searchFlights(idFlight);
         if(id!=-1) {
-        	System.out.println("Volo trovato, cosa vuoi modificare?");
+        	System.out.println("Flight found, what do you want to change?");
         	System.out.println("1)ID\n"
-        			+ "2)Aeroporto di Partenza\n"
-        			+ "3)Giorno e orario di partenza\n"
-        			+ "4)Aeroporto di Arrivo\n"
-        			+ "5)Giorno e orario di arrivo\n"
-        			+ "6)Prezzo del biglietto\n"
-        			+ "7)Biglietti disponibili");
+        			+ "2)departure airport\n"
+        			+ "3)Departure day and time\n"
+        			+ "4)Arrival airport\n"
+        			+ "5)Arrival day and time\n"
+        			+ "6)Ticket price\n"
+        			+ "7)Tickets available");
         	int n=input.getInt();
-            System.out.print("Insert your change: ");
-        	fileContent[id][n-1] = input.getString();
-            fileFlights.writeOnCSV(fileContent, fileFlights.findLineAmount(), fileFlights.howManySplit(";"), ";");
+        	switch (n) {
+        	case 1:
+        		fileContent[id][0]=input.getString();
+        		fileFlights.writeOnCSV(fileContent, fileFlights.findLineAmount(), fileFlights.howManySplit(";"), ";");
+        		break;
+        	case 2:
+        		fileContent[id][1]=input.getString();
+        		fileFlights.writeOnCSV(fileContent, fileFlights.findLineAmount(), fileFlights.howManySplit(";"), ";");
+        		break;
+        	case 3:{
+        		int year = input.getInt();
+                int month = input.getInt();
+                int day = input.getInt();
+                int hour = input.getInt();
+                int min = input.getInt();
+                LocalDateTime depInfo=LocalDateTime.of(year, month, day, hour, min);
+                String sDepInfo=depInfo.getYear()+"-"+depInfo.getMonthValue()+"-"+depInfo.getDayOfMonth()+"T"+depInfo.getHour()+":"+depInfo.getMinute();
+                
+                String s=fileContent[id][4];
+                String sep[]=s.split(";");
+                String sepH[]=sep[4].split("-");
+                int y=Integer.parseInt(sepH[0]);
+                int mo=Integer.parseInt(sepH[1]);
+                int gi=Integer.parseInt(sepH[2]);
+                int h=Integer.parseInt(sepH[3]);
+                int m=Integer.parseInt(sepH[4]);
+                LocalDateTime info=LocalDateTime.of(y, mo, gi, h, m);
+                
+                if(depInfo.isBefore(info)) {
+                	fileContent[id][2]=sDepInfo;
+                	fileFlights.writeOnCSV(fileContent, fileFlights.findLineAmount(), fileFlights.howManySplit(";"), ";");
+                }
+        		}
+                break;
+        	case 4:
+        		fileContent[id][3]=input.getString();
+        		fileFlights.writeOnCSV(fileContent, fileFlights.findLineAmount(), fileFlights.howManySplit(";"), ";");
+        		break; 
+        	case 5:{
+        		int year = input.getInt();
+                int month = input.getInt();
+                int day = input.getInt();
+                int hour = input.getInt();
+                int min = input.getInt();
+                LocalDateTime depInfo=LocalDateTime.of(year, month, day, hour, min);
+                String sDepInfo=depInfo.getYear()+"-"+depInfo.getMonthValue()+"-"+depInfo.getDayOfMonth()+"T"+depInfo.getHour()+":"+depInfo.getMinute();
+                
+                String s=fileContent[id][2];
+                String sep[]=s.split(";");
+                String sepH[]=sep[2].split("-");
+                int y=Integer.parseInt(sepH[0]);
+                int mo=Integer.parseInt(sepH[1]);
+                int gi=Integer.parseInt(sepH[2]);
+                int h=Integer.parseInt(sepH[3]);
+                int m=Integer.parseInt(sepH[4]);
+                LocalDateTime info=LocalDateTime.of(y, mo, gi, h, m);
+                
+                if(depInfo.isAfter(info)) {
+                	fileContent[id][4]=sDepInfo;
+                	fileFlights.writeOnCSV(fileContent, fileFlights.findLineAmount(), fileFlights.howManySplit(";"), ";");
+                }
+                break;
+        	}
+        	case 6:
+        		double d=input.getDouble();
+        		if(d>=0) {
+        			String sd=Double.toString(d);
+        			fileContent[id][5]=sd;
+        			fileFlights.writeOnCSV(fileContent, fileFlights.findLineAmount(), fileFlights.howManySplit(";"), ";");
+        		}
+        		break;
+        	case 7:
+        		int t=input.getInt();
+        		if(t>=0) {
+        			String st=Integer.toString(t);
+        			fileContent[id][6]=st;
+        			fileFlights.writeOnCSV(fileContent, fileFlights.findLineAmount(), fileFlights.howManySplit(";"), ";");
+        		}
+        		
+        			
+        }
         }
     }
     public void delateFlight() throws IOException{
@@ -82,39 +161,45 @@ public class IOFlights {
         System.out.println("Enter the name of the departure airport: ");
         String airportDeparture = input.getString();
         System.out.println("Insert year, mouth, day, hour and minute of departure: ");
-        String year = input.getString();
-        String month = input.getString();
-        String day = input.getString();
-        String hour = input.getString();
-        String min = input.getString();
-        String depInfo = year+"-"+month+"-"+day+"T"+hour+":"+min;
+        int year = input.getInt();
+        int month = input.getInt();
+        int day = input.getInt();
+        int hour = input.getInt();
+        int min = input.getInt();
+        LocalDateTime depInfo=LocalDateTime.of(year, month, day, hour, min);
         
         System.out.println("Enter the name of the Arrival airport: ");
         String airportArrivals = input.getString();
         System.out.println("Insert year, mouth, day, hour and minute of Arrival: ");
-        year = input.getString();
-        month = input.getString();
-        day = input.getString();
-        hour = input.getString();
-        min = input.getString();
-        String arrInfo = year+"-"+month+"-"+day+"T"+hour+":"+min;
+        year = input.getInt();
+        month = input.getInt();
+        day = input.getInt();
+        hour = input.getInt();
+        min = input.getInt();
+        LocalDateTime arrInfo = LocalDateTime.of(year, month, month, hour, min);
         System.out.println("Insert price of a ticket: ");
-        String price=input.getString();
+        double price=input.getDouble();
         System.out.println("Enter maximum tickets for the plane: ");
-        String ticket=input.getString();;
+        int ticket=input.getInt();;
         
-        String add[][];
-        add = new String[1][7];
-        add[0][0]=id;
-        add[0][1]=airportDeparture;
-        add[0][2]=depInfo;
-        add[0][3]=airportArrivals;
-        add[0][4]=arrInfo;
-        add[0][5]=price;
-        add[0][6]=ticket;
-
+        if(depInfo.isBefore(arrInfo)&&price>=0&&ticket>=0&&searchFlights(id)==-1) {//stampa su file se la partenza è prima di arrivo, se il prezzo e i biglietti sono >=0 e se non si è trovato all'interno del file nessun volo con lo stesso id
+        	String sDepInfo=depInfo.getYear()+"-"+depInfo.getMonthValue()+"-"+depInfo.getDayOfMonth()+"T"+depInfo.getHour()+":"+depInfo.getMinute();
+        	String sArrInfo=arrInfo.getYear()+"-"+arrInfo.getMonthValue()+"-"+arrInfo.getDayOfMonth()+"T"+arrInfo.getHour()+":"+arrInfo.getMinute();
+        	String sPrice = Double.toString(price);
+        	String sTicket = Integer.toString(ticket);
+	        String add[][];
+	        add = new String[1][7];
+	        add[0][0]=id;
+	        add[0][1]=airportDeparture;
+	        add[0][2]=sDepInfo;
+	        add[0][3]=airportArrivals;
+	        add[0][4]=sArrInfo;
+	        add[0][5]=sPrice;
+	        add[0][6]=sTicket;
+	        fileFlights.writeOnCSVAddOnly(add, 1, 7, ";");
+        }
         
-        fileFlights.writeOnCSVAddOnly(add, 1, 7, ";");
+       
     }
 
 }
