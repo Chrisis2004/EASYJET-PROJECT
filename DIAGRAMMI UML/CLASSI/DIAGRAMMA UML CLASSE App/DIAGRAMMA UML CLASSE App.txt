@@ -1,0 +1,10 @@
+@startuml
+!theme mars
+class App
+{
+  +static Users.Pearson pearson
+  +static boolean fistActionDone;
+  +static void main(String[] args)
+  +static void application()
+}
+@enduml
