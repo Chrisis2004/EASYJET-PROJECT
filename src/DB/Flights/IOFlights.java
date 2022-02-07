@@ -58,7 +58,7 @@ public class IOFlights {
         if(id!=-1) {
         	System.out.println("Flight found, what do you want to change?");
         	System.out.println("1)ID\n"
-        			+ "2)departure airport\n"
+        			+ "2)Departure airport\n"
         			+ "3)Departure day and time\n"
         			+ "4)Arrival airport\n"
         			+ "5)Arrival day and time\n"
