@@ -9,17 +9,11 @@ import java.io.LineNumberReader;
 public class FileIO {
     private File file;
     public int nLines;
-    private String[] fileContent;
 
     public FileIO(String fileName) throws IOException
     {
         this.file = new File(fileName);
         this.nLines = findLineAmount();
-        if(nLines!=0){
-            fileContent = new String[this.nLines];
-            fileContent = readFromFile();
-        }
-        
     }
     public int findLineAmount() throws IOException {
         LineNumberReader lineNumberReader = new LineNumberReader(new FileReader(file));
@@ -41,8 +35,16 @@ public class FileIO {
         else {
             System.out.println("The file is void");
             return null;
+        } 
+    }
+    public void writeOnFile(String[] toWrite) throws IOException {
+        BufferedWriter fileWriter = new BufferedWriter(new FileWriter(this.file));
+        for (int i=0;i<toWrite.length;i++){
+            fileWriter.write(toWrite[i]);
+            fileWriter.write("\n");
         }
-        
+        fileWriter.flush();
+        fileWriter.close();
     }
 
     public int howManySplit(String separatorChar) throws IOException{
@@ -90,8 +92,9 @@ public class FileIO {
 
     public void writeOnCSVAddOnly(String[][] toWrite, int nLines, int nSplits, String separatorChar) throws IOException
     {
+        String[] fileContent = readFromFile();
         BufferedWriter fileWriter = new BufferedWriter(new FileWriter(this.file));
-        for (int i=0;i<this.nLines;i++){
+        for (int i=0;i<findLineAmount();i++){
             fileWriter.write(fileContent[i]);
             fileWriter.write("\n");
         }
@@ -130,6 +133,33 @@ public class FileIO {
             fileWriter.write(fileContent[i]);
             fileWriter.write("\n");
         }
+        fileWriter.close();
+    }
+    public void writeOnFileAddOnly(String[] toWrite) throws IOException {
+        String[] fileContent = readFromFile();
+        BufferedWriter fileWriter = new BufferedWriter(new FileWriter(this.file));
+        for (int i=0;i<findLineAmount();i++){
+            fileWriter.write(fileContent[i]);
+            fileWriter.write("\n");
+        }
+        for (int i=0;i<toWrite.length;i++){
+            fileWriter.write(toWrite[i]);
+            fileWriter.write("\n");
+        }       
+        fileWriter.flush();
+        fileWriter.close();
+    }
+    public void delateLineFromFile(int nLineToDelate) throws IOException{
+        String[] fileContent = readFromFile();
+        int nLines = findLineAmount();
+        BufferedWriter fileWriter = new BufferedWriter(new FileWriter(this.file));
+        for (int i=0;i<nLines;i++){
+            if (i==nLineToDelate)
+                continue;
+            fileWriter.write(fileContent[i]);
+            fileWriter.write("\n");
+        }
+        fileWriter.flush();
         fileWriter.close();
     }
 
