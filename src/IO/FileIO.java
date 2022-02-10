@@ -86,15 +86,16 @@ public class FileIO {
         fileWriter.close();
     }
 
-    public void delateFile(){
+    public void deleteFile(){
         this.file.delete();
     }
 
     public void writeOnCSVAddOnly(String[][] toWrite, int nLines, int nSplits, String separatorChar) throws IOException
     {
         String[] fileContent = readFromFile();
+        int nLinesFile = findLineAmount();
         BufferedWriter fileWriter = new BufferedWriter(new FileWriter(this.file));
-        for (int i=0;i<findLineAmount();i++){
+        for (int i=0;i<nLinesFile;i++){
             fileWriter.write(fileContent[i]);
             fileWriter.write("\n");
         }
@@ -137,8 +138,9 @@ public class FileIO {
     }
     public void writeOnFileAddOnly(String[] toWrite) throws IOException {
         String[] fileContent = readFromFile();
+        int nLines = findLineAmount();
         BufferedWriter fileWriter = new BufferedWriter(new FileWriter(this.file));
-        for (int i=0;i<findLineAmount();i++){
+        for (int i=0;i<nLines;i++){
             fileWriter.write(fileContent[i]);
             fileWriter.write("\n");
         }
