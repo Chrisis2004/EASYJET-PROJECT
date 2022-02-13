@@ -200,8 +200,56 @@ public class IOFlights {
 	        add[0][6]=sTicket;
 	        fileFlights.writeOnCSVAddOnly(add, 1, 7, ";");
         }
-        
-       
     }
-
+    public void printFlight() throws IOException {
+        String[][] fileContent = fileFlights.readFromCSV(";");
+        System.out.println("You have two choices for search of flight: ");
+        System.out.println("0. Use id");
+        System.out.println("1. Use departure and arrival");
+        System.out.print("Your choose: ");
+        int choose = input.getInt();
+        switch (choose) {
+            case 0:
+                System.out.print("Insert id:");
+                String id = input.getString();
+                int idFound = searchFlights(id);
+                if(idFound == -1){
+                    System.out.println("Flight not found!");
+                    break;
+                }
+                String[] toReturn = fileContent[idFound];
+                System.out.println("Flight: " + toReturn[0]);
+                System.out.println("Departure: " + toReturn[1] + " - " + toReturn[2]);
+                System.out.println("Arrival: " + toReturn[3] + " - " + toReturn[4]);
+                System.out.println("Prize: " + toReturn[5]);
+                System.out.println("Seats: " + toReturn[6]);
+                break;
+            
+            case 1:
+                System.out.print("Insert departure: ");
+                String departure = input.getString();
+                System.out.print("Insert arrival: ");
+                String arrival = input.getString();
+                int i = searchFlights(departure, arrival);
+                if(i == -1){
+                    System.out.println("Flight not found!");
+                    break;
+                }
+                String[] toPrint = fileContent[i];
+                System.out.println("Flight: " + toPrint[0]);
+                System.out.println("Departure: " + toPrint[1] + " - " + toPrint[2]);
+                System.out.println("Arrival: " + toPrint[3] + " - " + toPrint[4]);
+                System.out.println("Prize: " + toPrint[5]);
+                System.out.println("Seats: " + toPrint[6]);
+                break;
+            default:
+                System.out.println("You haven't insered a correct value!");
+        }
+    }
+    public String[] searchFlightsCostumerCity(String departure, String arrival) {
+        return null;
+    }
+    public String[] searchFlightsCostumerDateTime(String departure, String arrival) {
+        return null;
+    }
 }

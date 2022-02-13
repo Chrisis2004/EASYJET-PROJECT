@@ -63,14 +63,14 @@ public class Costumer extends Pearson{
                         case 1: 
                             System.out.println("Insert the city of departure and of arrival: ");
                             System.out.print("Departure: ");
-                            String DateDeparture = input.getDataTime();
+                            String dateDeparture = input.getDataTime();
                             System.out.print("\nArrival: ");
-                            String DateArrival = input.getDataTime();
-                            String[] flightFound = flightsManager.searchFlightsCostumerDateTime(departure,arrival);
+                            String dateArrival = input.getDataTime();
+                            String[] flightFound = flightsManager.searchFlightsCostumerDateTime(dateDeparture,dateArrival);
                             if (flightFound == null)
                                     System.out.println("This route is not managed by our company yet, sorry");
                             else {
-                                
+
                             }
                             break;
                         default:
