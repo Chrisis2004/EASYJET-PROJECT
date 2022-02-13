@@ -59,7 +59,7 @@ public class Administrator extends Pearson {
                     //funzione dei biglietti
                     break;
                 case 6:
-                    //funzione che stampa un volo
+                    flightsManager.printFlight();
                     break;
                 default:
             
