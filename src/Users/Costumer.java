@@ -6,7 +6,8 @@ import DB.Airports.IOAirports;
 import DB.Flights.IOFlights;
 import DB.Tickets.IOTickets;
 import IO.getInputFromKeyboard;
-public class Costumer extends Pearson{
+
+public class Costumer extends Pearson {
 
     IOFlights flightsManager;
     IOAirports airportManager;
@@ -18,7 +19,7 @@ public class Costumer extends Pearson{
         flightsManager = new IOFlights();
     }
 
-    public void menuAdmin() throws IOException{
+    public void menuAdmin() throws IOException {
         boolean exitToMenu = false;
         int choose;
         while (exitToMenu == false) {
@@ -42,7 +43,7 @@ public class Costumer extends Pearson{
                     System.out.println("1. Using data of departure and data of arrival ?");
                     System.out.print("Choose: ");
                     int chooseSearch = input.getInt();
-                    switch (chooseSearch){
+                    switch (chooseSearch) {
                         case 0:
                             System.out.println("Insert the city of departure and of arrival: ");
                             System.out.print("Departure: ");
@@ -51,36 +52,68 @@ public class Costumer extends Pearson{
                             System.out.print("Arrival: ");
                             String arrival = input.getString();
                             int verifyExistingArrival = airportManager.verifyExisting(arrival);
-                            if ((verifyExistingArrival==-1)||(verifyExistingDeparture==-1)){ 
+                            if ((verifyExistingArrival == -1) || (verifyExistingDeparture == -1)) {
                                 System.out.println("The airport is not managed by our company yet, sorry");
                                 break;
                             } else {
-                                String[] flightFound = flightsManager.searchFlightsCostumerCity(departure,arrival);
+                                String[] flightFound = flightsManager.searchFlightsCostumerCity(departure, arrival);
                                 if (flightFound == null)
                                     System.out.println("This route is not managed by our company yet, sorry");
+                                else {
+                                    int i;
+                                    for (i = 0; i < flightFound.length; i++)
+                                        System.out.println(i + ". " + flightFound[i]);
+                                    System.out.println("Do you want book a flight of them ?");
+                                    System.out.print("0. yes");
+                                    System.out.print("1. no");
+                                    int bookFlight = input.getInt();
+                                    if (bookFlight != 1)
+                                        break;
+                                    System.out.print("Which one do you want book?\nInssert the number of the flight: ");
+                                    int flightToBook = input.getInt();
+                                    bookTicket(flightFound[flightToBook]);
+                                }
                             }
                             break;
-                        case 1: 
+                        case 1:
                             System.out.println("Insert the city of departure and of arrival: ");
                             System.out.print("Departure: ");
                             String dateDeparture = input.getDataTime();
                             System.out.print("\nArrival: ");
                             String dateArrival = input.getDataTime();
-                            String[] flightFound = flightsManager.searchFlightsCostumerDateTime(dateDeparture,dateArrival);
-                            if (flightFound == null)
+                            String[] flightFound = flightsManager.searchFlightsCostumerDateTime(dateDeparture,
+                                    dateArrival);
+                            if (flightFound == null) {
+                                System.out.println("The airport is not managed by our company yet, sorry");
+                                break;
+                            } else {
+                                flightFound = flightsManager.searchFlightsCostumerCity(dateDeparture, dateArrival);
+                                if (flightFound == null)
                                     System.out.println("This route is not managed by our company yet, sorry");
-                            else {
-
+                                else {
+                                    int i;
+                                    for (i = 0; i < flightFound.length; i++)
+                                        System.out.println(i + ". " + flightFound[i]);
+                                    System.out.println("Do you want book a flight of them ?");
+                                    System.out.print("0. yes");
+                                    System.out.print("1. no");
+                                    int bookFlight = input.getInt();
+                                    if (bookFlight != 1)
+                                        break;
+                                    System.out.print("Which one do you want book?\nInssert the number of the flight: ");
+                                    int flightToBook = input.getInt();
+                                    bookTicket(flightFound[flightToBook]);
+                                }
                             }
                             break;
                         default:
                     }
                     break;
                 case 2:
-                    
+
                     break;
                 case 3:
-                    
+
                     break;
                 default:
             }
@@ -91,5 +124,9 @@ public class Costumer extends Pearson{
             if (!menuExit.equals("yes"))
                 exitToMenu = true;
         }
+    }
+
+    public void bookTicket(String flight) {
+        
     }
 }
