@@ -27,7 +27,7 @@ public class Administrator extends Pearson {
         while (exitToMenu == false) {
             input.clearConsole();
 
-            System.out.println("Hi " + getName() + getSurname() + " choose the action that you want do: ");
+            System.out.println("Hi " + getName() + " " + getSurname() + " choose the action that you want do: ");
             System.out.println("0. See all flight");
             System.out.println("1. Modify a flight");
             System.out.println("2. Delate a flight");
@@ -62,6 +62,7 @@ public class Administrator extends Pearson {
                     //funzione che stampa un volo
                     break;
                 default:
+                    System.out.println("You haven't insered a correct number!!\n");
             
             }
 

@@ -30,6 +30,8 @@ public class IOFlights {
     	}
     }
 
+    
+
     public int searchFlights(String idFlight) throws IOException{
     	String fileContent[][] = fileFlights.readFromCSV(";");
             for(int i=0; i<fileContent.length; i++){

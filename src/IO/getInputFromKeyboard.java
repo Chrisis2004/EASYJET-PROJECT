@@ -10,19 +10,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-/*
-Utilities: 
-    - getInt
-    - getByte
-    - getLong
-    - getChar
-    - getString
-    - getDouble
-    - getFloat
-How that work:
-    dataType variableName = previousMethods();
-    In this way you can fill a variable using the input from console
-*/
+import java.time.LocalDateTime;
 
 public class getInputFromKeyboard {
     // COSTRUCTOR
@@ -312,5 +300,20 @@ public class getInputFromKeyboard {
             e.printStackTrace();
         }
         return generatedPassword;
+    }
+
+    public String getDataTime(){
+        String toReturn;
+        System.out.println("Insert year: ");
+        String year = getString();
+        System.out.println("Insert month: ");
+        String month = getString();
+        System.out.println("Insert day: ");
+        String day = getString();
+        System.out.println("Insert hour:minutes : ");
+        String time = getString();
+
+        toReturn = year + "-" + month + "-" + day + "T" + time;
+        return toReturn;
     }
 }
