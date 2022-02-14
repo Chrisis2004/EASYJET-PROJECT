@@ -19,7 +19,7 @@ public class Costumer extends Pearson {
         flightsManager = new IOFlights();
     }
 
-    public void menuAdmin() throws IOException {
+    public void menuCostumer() throws IOException {
         boolean exitToMenu = false;
         int choose;
         while (exitToMenu == false) {
@@ -38,7 +38,7 @@ public class Costumer extends Pearson {
                     flightsManager.printFlights();
                     break;
                 case 1:
-                    System.out.println("Hw do you want search a flight ?");
+                    System.out.println("How do you want search a flight ?");
                     System.out.println("0. Using departure and arrival");
                     System.out.println("1. Using data of departure and data of arrival ?");
                     System.out.print("Choose: ");
@@ -113,7 +113,16 @@ public class Costumer extends Pearson {
 
                     break;
                 case 3:
-
+                    System.out.println("Your booked tickets: ");
+                    String[] ticketsArray= ticketsManager.seeBoughtTickets();
+                    for(int i = 0; i < ticketsArray.length; i++)
+                    {
+                        System.out.println(i+". "+ ticketsArray[i]);
+                    }
+                    System.out.println("Which ticket do you want to cancel a reservation for?");
+                    System.out.println("Insert the number of the flight: ");
+                    int ticketArrayLine = input.getInt();
+                    deleteTicket(ticketsArray[ticketArrayLine]);
                     break;
                 default:
             }
@@ -126,7 +135,13 @@ public class Costumer extends Pearson {
         }
     }
 
-    public void bookTicket(String flight) {
+    public void bookTicket(String flight)
+    {
+        
+    }
+
+    public void deleteTicket(String flight)
+    {
         
     }
 }

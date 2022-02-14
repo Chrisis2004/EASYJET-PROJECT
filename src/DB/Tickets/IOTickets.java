@@ -51,10 +51,9 @@ public class IOTickets {
         return false;
     }
 
-    public void delateAirport(String airport) throws IOException {
+    public void deleteTicket(String airport) throws IOException {
         // funzione di elimina prenotazione
     }
-    public void seeBoughtTickets(){
-
+    public String[] seeBoughtTickets(){
     }
 }
