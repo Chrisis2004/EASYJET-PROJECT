@@ -33,8 +33,12 @@ public class IOTickets {
         String[][] toAdd = new String[1][3];
         fileTickets.writeOnCSVAddOnly(toAdd, 1, 3, ";");
     }
+    public void addTickets(String[] flight, String userMail, String ticketsToBuy) throws IOException {
+        String[][] toAdd = new String[1][3];
+        fileTickets.writeOnCSVAddOnly(toAdd, 1, 3, ";");
+    }
 
-    public boolean verifyExisting(String[] ticket) throws IOException {
+    public boolean verifyExisting(String[] ticket, int nTicket) throws IOException {
         String[][] fileContent = getAllTickets();
         for (int i = 0; i < fileContent.length; i++) {
             if ((fileContent[i][0].equals(ticket[0]))&&(fileContent[i][1].equals(ticket[1]))&&(fileContent[i][2].equals(ticket[2])))

@@ -70,7 +70,7 @@ public class Costumer extends Pearson {
                                     if (bookFlight != 1)
                                         break;
                                     System.out.print("Which one do you want book?\nInssert the number of the flight: ");
-                                    int flightToBook = input.getInt();
+                                    int flightToBook = input.getInt();;
                                     bookTicket(flightFound[flightToBook]);
                                 }
                             }
