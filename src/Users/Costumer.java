@@ -17,6 +17,8 @@ public class Costumer extends Pearson {
     public Costumer(String name, String surname, String mail, String password, String userType) throws IOException {
         super(name, surname, mail, password, userType);
         flightsManager = new IOFlights();
+        airportManager = new IOAirports();
+        ticketsManager = new IOTickets();
     }
 
     public void menuCostumer() throws IOException {
@@ -38,6 +40,7 @@ public class Costumer extends Pearson {
                     flightsManager.printFlights();
                     break;
                 case 1:
+                    input.clearConsole();
                     System.out.println("How do you want search a flight ?");
                     System.out.println("0. Using departure and arrival");
                     System.out.println("1. Using data of departure and data of arrival ?");
@@ -56,69 +59,71 @@ public class Costumer extends Pearson {
                                 System.out.println("The airport is not managed by our company yet, sorry");
                                 break;
                             } else {
-                                String[] flightFound = flightsManager.searchFlightsCostumerCity(departure, arrival);
+                                String[] flightFound = flightsManager.searchFlightsCostumer(departure, arrival,
+                                        "airport");
                                 if (flightFound == null)
                                     System.out.println("This route is not managed by our company yet, sorry");
                                 else {
                                     int i;
                                     for (i = 0; i < flightFound.length; i++)
-                                        System.out.println(i + ". " + flightFound[i]);
+                                        System.out.println(i + ". " + printFlightForCostumer(flightFound[i]));
                                     System.out.println("Do you want book a flight of them ?");
-                                    System.out.print("0. yes");
-                                    System.out.print("1. no");
+                                    System.out.println("0. yes");
+                                    System.out.print("1. no\nYour choose: ");
                                     int bookFlight = input.getInt();
-                                    if (bookFlight != 1)
+                                    if (bookFlight != 0)
                                         break;
-                                    System.out.print("Which one do you want book?\nInssert the number of the flight: ");
-                                    int flightToBook = input.getInt();;
+                                    System.out.print(
+                                            "Which one do you want book?\nInsert the number of the flight (take it on the list of flight found): ");
+                                    int flightToBook = input.getInt(); // inserire controllo su lunghezza array
                                     bookTicket(flightFound[flightToBook]);
                                 }
                             }
                             break;
                         case 1:
-                            System.out.println("Insert the city of departure and of arrival: ");
+                            System.out.println("Insert the date of departure and of arrival: ");
                             System.out.print("Departure: ");
                             String dateDeparture = input.getDataTime();
                             System.out.print("\nArrival: ");
                             String dateArrival = input.getDataTime();
-                            String[] flightFound = flightsManager.searchFlightsCostumerDateTime(dateDeparture,
-                                    dateArrival);
+                            // inserire in qualche modod controllo sulle date, devono esssre stringhe non
+                            // datatime per ora
+                            String[] flightFound = flightsManager.searchFlightsCostumer(dateDeparture,
+                                    dateArrival, "date");
                             if (flightFound == null) {
                                 System.out.println("The airport is not managed by our company yet, sorry");
                                 break;
                             } else {
-                                flightFound = flightsManager.searchFlightsCostumerCity(dateDeparture, dateArrival);
-                                if (flightFound == null)
-                                    System.out.println("This route is not managed by our company yet, sorry");
-                                else {
-                                    int i;
-                                    for (i = 0; i < flightFound.length; i++)
-                                        System.out.println(i + ". " + flightFound[i]);
-                                    System.out.println("Do you want book a flight of them ?");
-                                    System.out.print("0. yes");
-                                    System.out.print("1. no");
-                                    int bookFlight = input.getInt();
-                                    if (bookFlight != 1)
-                                        break;
-                                    System.out.print("Which one do you want book?\nInssert the number of the flight: ");
-                                    int flightToBook = input.getInt();
-                                    bookTicket(flightFound[flightToBook]);
-                                }
+                                int i;
+                                for (i = 0; i < flightFound.length; i++)
+                                    System.out.println(i + ". " + printFlightForCostumer(flightFound[i]));
+                                System.out.println("Do you want book a flight of them ?");
+                                System.out.println("0. yes");
+                                System.out.print("1. no\nYour choose: ");
+                                int bookFlight = input.getInt();
+                                if (bookFlight != 0)
+                                    break;
+                                System.out.print(
+                                        "Which one do you want book?\nInsert the number of the flight (take it on the list of flight found): ");
+                                int flightToBook = input.getInt();
+                                bookTicket(flightFound[flightToBook]);
                             }
                             break;
                         default:
+                            System.out.println("You have missed the correct insertion\n");
                     }
                     break;
                 case 2:
-
+                    input.clearConsole();
+                    System.out.println("Your booked tickets: ");
+                    ticketsManager.printBoughtTickets(getMail());
                     break;
                 case 3:
+                    input.clearConsole();
                     System.out.println("Your booked tickets: ");
-                    String[] ticketsArray= ticketsManager.seeBoughtTickets();
-                    for(int i = 0; i < ticketsArray.length; i++)
-                    {
-                        System.out.println(i+". "+ ticketsArray[i]);
-                    }
+                    String[] ticketsArray = ticketsManager.getBoughtTickets(getMail());
+                    for (int i = 0; i < ticketsArray.length; i++)
+                        System.out.println(i + ". " + ticketsArray[i]);
                     System.out.println("Which ticket do you want to cancel a reservation for?");
                     System.out.println("Insert the number of the flight: ");
                     int ticketArrayLine = input.getInt();
@@ -126,22 +131,31 @@ public class Costumer extends Pearson {
                     break;
                 default:
             }
-
             System.out.print(
-                    "Do you need something again?\n If you write \"yes\" you will return to the menu\n else write all other words for exit.");
+                    "\nDo you need something again?\nIf you write \"yes\" you will return to the menu else write all other words for exit.");
             String menuExit = input.getString();
             if (!menuExit.equals("yes"))
                 exitToMenu = true;
         }
     }
 
-    public void bookTicket(String flight)
-    {
-        
+    public void bookTicket(String flight) throws IOException {
+        String[] flightToBook = flight.split(";");
+        String idToBook = flightToBook[0];
+        System.out.println("How many tickets do you want buy ?");
+        System.out.print("Number of tickets: ");
+        int nTickets = input.getInt();
+        ticketsManager.addTicket(idToBook, getMail(), nTickets);
     }
 
-    public void deleteTicket(String flight)
-    {
-        
+    public void deleteTicket(String flight) {
+
+    }
+
+    public String printFlightForCostumer(String flight) {
+        String[] splitted = flight.split(";");
+        return "Departure: " + splitted[1] + " " + input.printDataTime(splitted[2]) + " "
+                + " Arrival: " + splitted[3] + " " + input.printDataTime(splitted[4])
+                + " Availeble seats: " + splitted[7] + " Price for ticket: " + splitted[6];
     }
 }

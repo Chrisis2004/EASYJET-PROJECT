@@ -3,6 +3,7 @@ package Users;
 import java.io.IOException;
 
 import DB.Flights.IOFlights;
+import DB.Tickets.IOTickets;
 import DB.Users.IOUsers;
 import IO.getInputFromKeyboard;
 import IO.mailException;
@@ -12,6 +13,7 @@ public class Administrator extends Pearson {
 
     IOFlights flightsManager;
     IOUsers userManager;
+    IOTickets ticketsManager;
     getInputFromKeyboard input = new getInputFromKeyboard();
 
     public Administrator(String name, String surname, String mail, String password, String userType)
@@ -19,6 +21,7 @@ public class Administrator extends Pearson {
         super(name, surname, mail, password, userType);
         flightsManager = new IOFlights();
         usersManager = new IOUsers();
+        ticketsManager = new IOTickets();
     }
 
     public void menuAdmin() throws IOException, passwordException, mailException {
@@ -41,33 +44,41 @@ public class Administrator extends Pearson {
 
             switch (choose) {
                 case 0:
+                    input.clearConsole();
                     flightsManager.printFlights();
                     break;
                 case 1:
+                    input.clearConsole();
                     flightsManager.modifyFlight();
                     break;
                 case 2:
+                    input.clearConsole();
                     flightsManager.delateFlight();
                     break;
                 case 3:
+                    input.clearConsole();
                     flightsManager.addFlight();
                     break;
                 case 4:
+                    input.clearConsole();
                     adminRegistration();
                     break;
                 case 5:
-                    //funzione dei biglietti
+                    input.clearConsole();
+                    ticketsManager.printAllTickets();
                     break;
                 case 6:
-                    //funzione che stampa un volo
+                    input.clearConsole();
+                    flightsManager.printFlight();
                     break;
                 default:
                     System.out.println("You haven't insered a correct number!!\n");
-            
+
             }
 
-            System.out.print(
+            System.out.println(
                     "Do you need something again?\n If you write \"yes\" you will return to the menu\n else write all other words for exit.");
+            System.out.print("Your choose: ");
             String menuExit = input.getString();
             if (!menuExit.equals("yes"))
                 exitToMenu = true;
@@ -101,7 +112,7 @@ public class Administrator extends Pearson {
 
                     switch (choose) {
                         case 1:
-                        userManager.changeUserType(idUser, "A");
+                            userManager.changeUserType(idUser, "A");
                             reinsertAppened = true;
                             break;
                         case 2:
@@ -110,29 +121,28 @@ public class Administrator extends Pearson {
                             mail = input.getMail();
                             break;
                     }
-                } 
-                else if (usersManager.verifyUserType(idUser).equals("A")) {
+                } else if (usersManager.verifyUserType(idUser).equals("A")) {
                     input.clearConsole();
                     System.out.println(
                             "The entered email has already been assigned to a administrator, now you can perform the following actions: ");
-                        System.out.println("1. Uptade the type of user to a Costumer");
-                        System.out.println("2. Change the mail insered");
-                        System.out.print("Your choose: ");
-    
-                        int choose;
-                        choose = input.getInt();
-    
-                        switch (choose) {
-                            case 1:
-                                userManager.changeUserType(idUser, "C");
-                                reinsertAppened = true;
-                                break;
-                            case 2:
-                                input.clearConsole();
-                                System.out.print("Reinsert mail: ");
-                                mail = input.getMail();
-                                break;
-                        }
+                    System.out.println("1. Uptade the type of user to a Costumer");
+                    System.out.println("2. Change the mail insered");
+                    System.out.print("Your choose: ");
+
+                    int choose;
+                    choose = input.getInt();
+
+                    switch (choose) {
+                        case 1:
+                            userManager.changeUserType(idUser, "C");
+                            reinsertAppened = true;
+                            break;
+                        case 2:
+                            input.clearConsole();
+                            System.out.print("Reinsert mail: ");
+                            mail = input.getMail();
+                            break;
+                    }
                 }
                 if (reinsertAppened)
                     break;
@@ -142,9 +152,15 @@ public class Administrator extends Pearson {
             System.out.print("Insert password: ");
             String password = input.getPassword();
             usersManager.addUser(name, surname, mail, password, "A");
-        }
-        else 
+        } else
             System.out.println("Something has gone wrong, the registation has failed!");
+    }
+
+    public String printFlightForAdmin(String flight) {
+        String[] splitted = flight.split(";");
+        return "Id: " + splitted[0] + " Departure: " + splitted[1] + " " + input.printDataTime(splitted[2]) + " "
+                + " Arrival: " + splitted[3] + " " + input.printDataTime(splitted[4])
+                + " Availeble seats: " + splitted[5] + " Price for ticket: " + splitted[6] + "Availeble seats: " + splitted[7];
     }
 
 }

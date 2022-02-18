@@ -54,6 +54,7 @@ public class IOUsers {
         String toReturn = file[nLine][3];
         return toReturn;
     }
+
     public String getUserType(int nLine) throws IOException {
         String[][] file = fileUsers.readFromCSV(";");
         String toReturn = file[nLine][4];
@@ -83,7 +84,8 @@ public class IOUsers {
         String[][] file = fileUsers.readFromCSV(";");
         int nTry = 3;
         while ((!oldPassword.equals(file[nLineUser][3])) && (nTry > 0)) {
-            System.out.println("You have missed the correct password, you have " + nTry + " attemps yet do correct it." + file[nLineUser][3]);
+            System.out.println("You have missed the correct password, you have " + nTry + " attemps yet do correct it."
+                    + file[nLineUser][3]);
             System.out.print("Insert old password: ");
             oldPassword = input.getPassword();
             nTry--;
@@ -91,8 +93,7 @@ public class IOUsers {
         if (oldPassword.equals(file[nLineUser][3])) {
             file[nLineUser][3] = newPassword;
             fileUsers.writeOnCSV(file, fileUsers.findLineAmount(), fileUsers.howManySplit(";"), ";");
-        }
-        else 
+        } else
             System.out.print("Operation failed");
     }
 
@@ -107,7 +108,7 @@ public class IOUsers {
         fileUsers.writeOnCSVAddOnly(toWrite, 1, 5, ";");
     }
 
-    public void changeUserType(int nLineUser, String userType) throws IOException{
+    public void changeUserType(int nLineUser, String userType) throws IOException {
         String[][] file = fileUsers.readFromCSV(";");
         file[nLineUser][4] = userType;
         fileUsers.writeOnCSV(file, fileUsers.findLineAmount(), fileUsers.howManySplit(";"), ";");

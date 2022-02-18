@@ -224,7 +224,7 @@ public class getInputFromKeyboard {
         } catch (passwordException e) {
             passwordToReturn = e.passwordError(passwordToReturn);
         }
-        return passwordCripter(passwordToReturn,"password");
+        return passwordCripter(passwordToReturn, "password");
     }
 
     public void passwordValidation(String password) throws passwordException {
@@ -302,7 +302,7 @@ public class getInputFromKeyboard {
         return generatedPassword;
     }
 
-    public String getDataTime(){
+    public String getDataTime() {
         String toReturn;
         System.out.println("Insert year: ");
         String year = getString();
@@ -314,6 +314,18 @@ public class getInputFromKeyboard {
         String time = getString();
 
         toReturn = year + "-" + month + "-" + day + "T" + time;
+        return toReturn;
+    }
+
+    public String printDataTime(String dataTime) {
+        LocalDateTime data = LocalDateTime.parse(dataTime);
+        String toReturn;
+        if (data.getMinute() < 10)
+            toReturn = data.getDayOfMonth() + "-" + data.getMonthValue() + "-" + data.getYear() + " " + data.getHour()
+                    + ":0" + data.getMinute();
+        else
+            toReturn = data.getDayOfMonth() + "-" + data.getMonthValue() + "-" + data.getYear() + " " + data.getHour()
+                    + ":" + data.getMinute();
         return toReturn;
     }
 }

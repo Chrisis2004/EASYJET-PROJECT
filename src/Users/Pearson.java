@@ -61,9 +61,11 @@ public class Pearson {
     public void setPassword(String password) {
         this.password = password;
     }
+
     public String getUserType() {
         return userType;
     }
+
     public void setUserType(String userType) {
         this.userType = userType;
     }
@@ -149,9 +151,8 @@ public class Pearson {
             System.out.print("Insert password: ");
             String password = input.getPassword();
             usersManager.addUser(name, surname, mail, password, "C");
-            return logIn(mail,password);
-        }
-        else 
+            return logIn(mail, password);
+        } else
             return false;
     }
 
