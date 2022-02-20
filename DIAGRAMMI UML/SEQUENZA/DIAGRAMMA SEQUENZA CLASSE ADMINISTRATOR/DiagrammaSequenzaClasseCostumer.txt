@@ -1,0 +1,73 @@
+@startuml
+actor User as Foo
+entity System as Foo2
+database DB as Foo3
+
+==VIEW FLIGHTS==
+Foo -> Foo2 : See all flights
+Foo2 -> Foo3 : Read all flights
+Foo3 -> Foo2: Return all flights
+Foo2 -> Foo : Print on screen all flights
+
+==SEARCH A FLIGHT==
+alt Search with departure/arrival
+Foo -> Foo2 : Insert cities
+Foo2 -> Foo3: Check the data
+
+alt Data correct
+Foo3 -> Foo2: Return flights
+Foo2 -> Foo: Book one of the flight?
+
+alt Yes
+Foo2 -> Foo: Which one you want to book?
+Foo -> Foo2: Insert the flight to book
+Foo2 -> Foo3: Pass the information
+Foo3 -> Foo2: Return the information
+Foo2 -> Foo: Print on screen the results
+
+else No
+Foo2 -> Foo: Print on screen the default menu
+end
+
+else Data not found
+Foo3 -> Foo2: Data not found
+Foo2 -> Foo: Sorry, there isn't a route for these cities
+end
+
+else Search with Data and Time
+Foo -> Foo2 : Insert data and time of the flight
+Foo2 -> Foo3: Check the data
+
+alt Data correct
+Foo3 -> Foo2: Return flights
+Foo2 -> Foo: Book one of the flight?
+
+alt Yes
+Foo2 -> Foo: Which one you want to book?
+Foo -> Foo2: Insert the flight to book
+Foo2 -> Foo3: Pass the information
+Foo3 -> Foo2: Return the information
+Foo2 -> Foo: Print on screen the results
+
+else No
+Foo2 -> Foo: Print on screen the default menu
+end
+
+else Data not found
+Foo3 -> Foo2: Data not found
+Foo2 -> Foo: Sorry, there isn't a route for these dates and times
+end
+end
+
+== BOOKED FLIGHTS ==
+Foo -> Foo2 : View all booked flights
+Foo2 -> Foo3: Request the information
+Foo3 -> Foo2: Return the information
+Foo2 -> Foo: Print on screen the flights
+
+== CANCEL RESERVATION ==
+Foo -> Foo2 : Cancel a reservation (Insert data)
+Foo2 -> Foo3: Check the existence and request the elimination
+Foo3 -> Foo2: Return the results
+Foo2 -> Foo: Print on screen the results
+@enduml
