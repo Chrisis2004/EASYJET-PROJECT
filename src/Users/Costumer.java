@@ -122,13 +122,18 @@ public class Costumer extends Pearson {
                     input.clearConsole();
                     System.out.println("Your booked tickets: ");
                     String[] ticketsArray = ticketsManager.getBoughtTickets(getMail());
+                    if (ticketsArray==null)
+                        System.out.println("No one\n");
+                    else {
                     for (int i = 0; i < ticketsArray.length; i++)
-                        System.out.println(i + ". " + ticketsArray[i]);
+                        System.out.println(i + ". " + ticketsManager.printTicket(ticketsArray[i]));
                     System.out.println("Which ticket do you want to cancel a reservation for?");
                     System.out.println("Insert the number of the flight: ");
                     int ticketArrayLine = input.getInt();
                     deleteTicket(ticketsArray[ticketArrayLine]);
+                    }
                     break;
+                    
                 default:
             }
             System.out.print(
@@ -148,8 +153,8 @@ public class Costumer extends Pearson {
         ticketsManager.addTicket(idToBook, getMail(), nTickets);
     }
 
-    public void deleteTicket(String flight) {
-
+    public void deleteTicket(String ticket) throws IOException {
+        ticketsManager.deleteTicket(ticket);
     }
 
     public String printFlightForCostumer(String flight) {

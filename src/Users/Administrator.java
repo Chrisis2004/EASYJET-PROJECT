@@ -69,7 +69,7 @@ public class Administrator extends Pearson {
                     break;
                 case 6:
                     input.clearConsole();
-                    flightsManager.printFlight();
+                    flightsManager.printAFlight();
                     break;
                 default:
                     System.out.println("You haven't insered a correct number!!\n");

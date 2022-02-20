@@ -222,7 +222,7 @@ public class IOFlights {
         }
     }
 
-    public void printFlight() throws IOException {
+    public void printAFlight() throws IOException {
         String[][] fileContent = fileFlights.readFromCSV(";");
         System.out.println("You have two choices for search of flight: ");
         System.out.println("0. Use id");
@@ -319,5 +319,16 @@ public class IOFlights {
         String[][] fileContent = fileFlights.readFromCSV(";");
         fileContent[searchFlights(id)][7] = Integer.toString(availableSeats);
         fileFlights.writeOnCSV(fileContent, fileFlights.findLineAmount(), fileFlights.howManySplit(";"), ";");
+    }
+
+    public String getFlight(String id) throws IOException{
+        String[][] fileContent = fileFlights.readFromCSV(";");
+        String[] fileToReturn = fileFlights.readFromFile();
+        for (int i = 0; i < fileContent.length; i++) {
+            if (fileContent[i][0].equals(id)) {
+                return fileToReturn[i];
+            }
+        }
+        return null;
     }
 }

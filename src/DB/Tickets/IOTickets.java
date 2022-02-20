@@ -1,6 +1,7 @@
 package DB.Tickets;
 
 import java.io.IOException;
+import java.util.Vector;
 
 import DB.Flights.IOFlights;
 import IO.FileIO;
@@ -67,21 +68,48 @@ public class IOTickets {
         return false;
     }
 
-    public void deleteTicket(String airport) throws IOException {
-        // funzione di elimina prenotazione
+    public void deleteTicket(String ticketToDelate) throws IOException {
+        String[] fileContent = fileTickets.readFromFile();
+        boolean flag = false;
+        for (int i = 0; i < fileContent.length; i++) {
+            if (fileContent[i].equals(ticketToDelate)){
+                flag=true;
+                fileTickets.delateLineFromCSV(i);
+                System.out.println("The canceletion was succesful");
+                break;
+            }     
+        }
+        if (!flag)
+            System.out.println("The canceletion was unsuccesful");
     }
 
-    public String[] getBoughtTickets(String mail) {
-        return null;
+    public String[] getBoughtTickets(String mail) throws IOException {
+        String[][] fileContent = fileTickets.readFromCSV(";");
+        String[] fileToPrint = fileTickets.readFromFile();
+        Vector<String> vector = new Vector<>();
+        boolean flag = false;
+        for (int i = 0; i < fileContent.length; i++) 
+            if (fileContent[i][1].equals(mail)){
+                vector.add(fileToPrint[i]);
+                flag=true;
+            }       
+        if (!flag)
+            return null;
+        else 
+            return vector.toArray(new String[vector.size()]);
     }
 
     public void printBoughtTickets(String mail) throws IOException {
         String[][] fileContent = getAllTickets();
+        boolean flag = false;
         for (int i = 0; i < fileContent.length; i++) {
             if (fileContent[i][1].equals(mail)){
+                flag = true;
                 System.out.println((i+1) + ". " + fileContent[i][2] + " of " + getFlightToPrint(fileContent[i][0]));
             }
         }
+        if (!flag)
+            System.out.println("You haven't booked any flight\n");
     }
 
     public String getFlightToPrint(String id) throws IOException{
@@ -92,5 +120,9 @@ public class IOTickets {
             }
         }
         return null;
+    }
+    public String printTicket(String ticket) throws IOException{
+        String[] splitted = ticket.split(";");
+        return splitted[2] + " of " + getFlightToPrint(splitted[0]);
     }
 }
