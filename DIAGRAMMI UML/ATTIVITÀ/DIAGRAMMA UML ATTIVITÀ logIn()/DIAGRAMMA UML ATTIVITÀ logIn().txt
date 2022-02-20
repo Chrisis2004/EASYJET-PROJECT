@@ -1,0 +1,31 @@
+@startuml
+start
+:Insert mail;
+:Insert password;
+if(Mail found) then (yes)
+if(Mail and password are correct) then (yes)
+:Save name, surname, mail and password;
+
+if(Account is Costumer) then (yes)
+:Set the user as Costumer;
+else if (Account is Administrator) then (yes)
+:Set the user as a Administrator;
+
+else (no)
+:Report Error;
+stop
+endif;
+
+else (no)
+:Report Error;
+stop
+endif;
+
+else(no)
+:Report error;
+stop
+endif;
+
+:Login Completed;
+
+@enduml

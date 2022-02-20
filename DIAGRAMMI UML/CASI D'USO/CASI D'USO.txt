@@ -1,9 +1,8 @@
 @startuml
-!theme mars
 left to right direction
 actor Amministratore as Amministratore
 actor Utente as Utente
-package Sito_Alitalia {
+package EASYJET-PROJECT {
 usecase "Login" as L
 usecase "Gestire un volo" as M
 usecase "Visualizza Biglietti Comprati" as D

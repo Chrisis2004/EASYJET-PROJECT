@@ -20,7 +20,7 @@ class Costumer
 +String printFlightForCostumer(String flight)
 }
 
-class IOFlight{
+class IOFlights{
 -FileIO fileFlights;
 getInputFromKeyboard input = new getInputFromKeyboard();
 +IOFlights()
@@ -80,7 +80,7 @@ class getInputFromKeyboard{
 +String printDataTime(String dataTime)
 }
 
-class IOAirport{
+class IOAirports{
 -FileIO fileAirports
 +IOAirports()
 +String[] getAllAirports() 
@@ -175,4 +175,17 @@ class Administrator
 +void adminRegistration()
 +String printFlightForAdmin(String flight)
 }
+
+Costumer --> Pearson
+Administrator --> Pearson
+IOUsers -> Pearson #line.dashed;
+IOFlights --> Administrator #line.dashed;
+IOFlights --> Costumer #line.dashed;
+IOFlights --> IOTickets #line.dashed;
+IOAirports --> Costumer #line.dashed;
+IOAirports --> IOFlights #line.dashed;
+App o-- Costumer 
+App o-- Administrator
+passwordException o-- getInputFromKeyboard 
+mailException-- getInputFromKeyboard
 @enduml
