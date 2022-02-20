@@ -196,9 +196,7 @@ public class getInputFromKeyboard {
         }
 
         // validate the country code
-        if (matchFound && lastToken.length() >= 2
-                && mail.length() - 1 != lastToken.length()) {
-
+        if (matchFound && lastToken.length() >= 2 && mail.length() - 1 != lastToken.length()) {
             return true;
         } else {
             return false;

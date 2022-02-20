@@ -35,10 +35,11 @@ public class IOTickets {
 
     public void addTicket(String idFlight, String userMail, int ticketsToBuy) throws IOException {
         int availableSeats = flighManager.getAvailableSeats(idFlight);
-        if (ticketsToBuy==0)
-        System.out.println("Sorry the booking was unsuccessful");
-        else if (ticketsToBuy>availableSeats)
-            System.out.println("Our company disposes only " + availableSeats + " seats on this flight, sorry the booking was unsuccessful");
+        if (ticketsToBuy == 0)
+            System.out.println("Sorry the booking was unsuccessful");
+        else if (ticketsToBuy > availableSeats)
+            System.out.println("Our company disposes only " + availableSeats
+                    + " seats on this flight, sorry the booking was unsuccessful");
         else {
             flighManager.setAvailableSeats(idFlight, (availableSeats - ticketsToBuy));
             String[][] toAdd = new String[1][3];
@@ -74,12 +75,12 @@ public class IOTickets {
         String[] fileContent = fileTickets.readFromFile();
         boolean flag = false;
         for (int i = 0; i < fileContent.length; i++) {
-            if (fileContent[i].equals(ticketToDelate)){
-                flag=true;
+            if (fileContent[i].equals(ticketToDelate)) {
+                flag = true;
                 fileTickets.delateLineFromCSV(i);
                 System.out.println("The canceletion was succesful");
                 break;
-            }     
+            }
         }
         if (!flag)
             System.out.println("The canceletion was unsuccesful");
@@ -90,14 +91,14 @@ public class IOTickets {
         String[] fileToPrint = fileTickets.readFromFile();
         Vector<String> vector = new Vector<>();
         boolean flag = false;
-        for (int i = 0; i < fileContent.length; i++) 
-            if (fileContent[i][1].equals(mail)){
+        for (int i = 0; i < fileContent.length; i++)
+            if (fileContent[i][1].equals(mail)) {
                 vector.add(fileToPrint[i]);
-                flag=true;
-            }       
+                flag = true;
+            }
         if (!flag)
             return null;
-        else 
+        else
             return vector.toArray(new String[vector.size()]);
     }
 
@@ -105,25 +106,27 @@ public class IOTickets {
         String[][] fileContent = getAllTickets();
         boolean flag = false;
         for (int i = 0; i < fileContent.length; i++) {
-            if (fileContent[i][1].equals(mail)){
+            if (fileContent[i][1].equals(mail)) {
                 flag = true;
-                System.out.println((i+1) + ". " + fileContent[i][2] + " of " + getFlightToPrint(fileContent[i][0]));
+                System.out.println((i + 1) + ". " + fileContent[i][2] + " of " + getFlightToPrint(fileContent[i][0]));
             }
         }
         if (!flag)
             System.out.println("You haven't booked any flight\n");
     }
 
-    public String getFlightToPrint(String id) throws IOException{
+    public String getFlightToPrint(String id) throws IOException {
         String[][] fileContent = fileFlights.readFromCSV(";");
         for (int i = 0; i < fileContent.length; i++) {
             if (fileContent[i][0].equals(id)) {
-                return fileContent[i][1] + " - " + fileContent[i][3] + " " + fileContent[i][2] + " - " + fileContent[i][4];
+                return fileContent[i][1] + " - " + fileContent[i][3] + " " + fileContent[i][2] + " - "
+                        + fileContent[i][4];
             }
         }
         return null;
     }
-    public String printTicket(String ticket) throws IOException{
+
+    public String printTicket(String ticket) throws IOException {
         String[] splitted = ticket.split(";");
         return splitted[2] + " of " + getFlightToPrint(splitted[0]);
     }

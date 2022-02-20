@@ -160,7 +160,8 @@ public class Administrator extends Pearson {
         String[] splitted = flight.split(";");
         return "Id: " + splitted[0] + " Departure: " + splitted[1] + " " + input.printDataTime(splitted[2]) + " "
                 + " Arrival: " + splitted[3] + " " + input.printDataTime(splitted[4])
-                + " Availeble seats: " + splitted[5] + " Price for ticket: " + splitted[6] + "Availeble seats: " + splitted[7];
+                + " Availeble seats: " + splitted[5] + " Price for ticket: " + splitted[6] + "Availeble seats: "
+                + splitted[7];
     }
 
 }

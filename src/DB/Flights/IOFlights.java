@@ -70,7 +70,8 @@ public class IOFlights {
             switch (n) {
                 case 1:
                     fileContent[id][0] = input.getString();
-                    fileFlights.writeOnCSV(fileContent, fileFlights.findLineAmount(), fileFlights.howManySplit(";"),";");
+                    fileFlights.writeOnCSV(fileContent, fileFlights.findLineAmount(), fileFlights.howManySplit(";"),
+                            ";");
                     break;
                 case 2:
                     fileContent[id][1] = input.getString();
@@ -148,10 +149,11 @@ public class IOFlights {
                 case 7:
                     int t = input.getInt();
                     int c = getAvailableSeats(idFlight);
-                    if (t<=c) {
+                    if (t <= c) {
                         String st = Integer.toString(t);
                         fileContent[id][6] = st;
-                        fileFlights.writeOnCSV(fileContent, fileFlights.findLineAmount(), fileFlights.howManySplit(";"),";");
+                        fileFlights.writeOnCSV(fileContent, fileFlights.findLineAmount(), fileFlights.howManySplit(";"),
+                                ";");
                     }
 
             }
@@ -194,14 +196,14 @@ public class IOFlights {
         int seats = input.getInt();
         int aSeats = seats;
 
-        if ((depInfo.isBefore(arrInfo)) && (price >= 0) && (seats >= 0) && (searchFlights(id) == -1)){
+        if ((depInfo.isBefore(arrInfo)) && (price >= 0) && (seats >= 0) && (searchFlights(id) == -1)) {
             String sDepInfo = depInfo.getYear() + "-" + depInfo.getMonthValue() + "-" + depInfo.getDayOfMonth() + "T"
                     + depInfo.getHour() + ":" + depInfo.getMinute();
             String sArrInfo = arrInfo.getYear() + "-" + arrInfo.getMonthValue() + "-" + arrInfo.getDayOfMonth() + "T"
                     + arrInfo.getHour() + ":" + arrInfo.getMinute();
             String sPrice = Double.toString(price);
             String sSeats = Integer.toString(seats);
-            String sASeats= Integer.toString(aSeats);
+            String sASeats = Integer.toString(aSeats);
             String add[][];
             add = new String[1][8];
             add[0][0] = id;
@@ -296,7 +298,8 @@ public class IOFlights {
     public String printFlight(String[] flight) {
         return "Id: " + flight[0] + " Departure: " + flight[1] + " " + input.printDataTime(flight[2]) + " "
                 + " Arrival: " + flight[3] + " " + input.printDataTime(flight[4])
-                + " Availeble seats: " + flight[5] + " Price for ticket: " + flight[6] + "Availeble seats: " + flight[7];
+                + " Availeble seats: " + flight[5] + " Price for ticket: " + flight[6] + "Availeble seats: "
+                + flight[7];
     }
 
     public int getAvailableSeats(String id) throws IOException {
@@ -315,7 +318,7 @@ public class IOFlights {
         fileFlights.writeOnCSV(fileContent, fileFlights.findLineAmount(), fileFlights.howManySplit(";"), ";");
     }
 
-    public String getFlight(String id) throws IOException{
+    public String getFlight(String id) throws IOException {
         String[][] fileContent = fileFlights.readFromCSV(";");
         String[] fileToReturn = fileFlights.readFromFile();
         for (int i = 0; i < fileContent.length; i++) {
