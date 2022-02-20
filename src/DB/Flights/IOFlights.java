@@ -65,13 +65,12 @@ public class IOFlights {
                     + "4)Arrival airport\n"
                     + "5)Arrival day and time\n"
                     + "6)Ticket price\n"
-                    + "7)Tickets available");
+                    + "7)Seats available on the plane");
             int n = input.getInt();
             switch (n) {
                 case 1:
                     fileContent[id][0] = input.getString();
-                    fileFlights.writeOnCSV(fileContent, fileFlights.findLineAmount(), fileFlights.howManySplit(";"),
-                            ";");
+                    fileFlights.writeOnCSV(fileContent, fileFlights.findLineAmount(), fileFlights.howManySplit(";"),";");
                     break;
                 case 2:
                     fileContent[id][1] = input.getString();
@@ -148,11 +147,11 @@ public class IOFlights {
                     break;
                 case 7:
                     int t = input.getInt();
-                    if (t >= 0) {
+                    int c = getAvailableSeats(idFlight);
+                    if (t<=c) {
                         String st = Integer.toString(t);
                         fileContent[id][6] = st;
-                        fileFlights.writeOnCSV(fileContent, fileFlights.findLineAmount(), fileFlights.howManySplit(";"),
-                                ";");
+                        fileFlights.writeOnCSV(fileContent, fileFlights.findLineAmount(), fileFlights.howManySplit(";"),";");
                     }
 
             }
@@ -192,10 +191,10 @@ public class IOFlights {
         System.out.println("Insert price of a ticket: ");
         double price = input.getDouble();
         System.out.println("Enter maximum tickets for the plane: ");
-        int ticket = input.getInt();
-        ;
+        int seats = input.getInt();
+        int aSeats = input.getInt();
 
-        if (depInfo.isBefore(arrInfo) && price >= 0 && ticket >= 0 && searchFlights(id) == -1) {// stampa su file se la
+        if (depInfo.isBefore(arrInfo) && price >= 0 && seats >= 0 && searchFlights(id) == -1 && seats==aSeats){// stampa su file se la
                                                                                                 // partenza è prima di
                                                                                                 // arrivo, se il prezzo
                                                                                                 // e i biglietti sono
@@ -208,17 +207,19 @@ public class IOFlights {
             String sArrInfo = arrInfo.getYear() + "-" + arrInfo.getMonthValue() + "-" + arrInfo.getDayOfMonth() + "T"
                     + arrInfo.getHour() + ":" + arrInfo.getMinute();
             String sPrice = Double.toString(price);
-            String sTicket = Integer.toString(ticket);
+            String sSeats = Integer.toString(seats);
+            String sASeats= Integer.toString(aSeats);
             String add[][];
-            add = new String[1][7];
+            add = new String[1][8];
             add[0][0] = id;
             add[0][1] = airportDeparture;
             add[0][2] = sDepInfo;
             add[0][3] = airportArrivals;
             add[0][4] = sArrInfo;
             add[0][5] = sPrice;
-            add[0][6] = sTicket;
-            fileFlights.writeOnCSVAddOnly(add, 1, 7, ";");
+            add[0][6] = sSeats;
+            add[0][7] = sASeats;
+            fileFlights.writeOnCSVAddOnly(add, 1, 8, ";");
         }
     }
 
