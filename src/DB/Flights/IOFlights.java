@@ -187,7 +187,7 @@ public class IOFlights {
         day = input.getInt();
         hour = input.getInt();
         min = input.getInt();
-        LocalDateTime arrInfo = LocalDateTime.of(year, month, month, hour, min);
+        LocalDateTime arrInfo = LocalDateTime.of(year, month, day, hour, min);
         System.out.println("Insert price of a ticket: ");
         double price = input.getDouble();
         System.out.println("Enter maximum tickets for the plane: ");
@@ -195,7 +195,6 @@ public class IOFlights {
         int aSeats = seats;
 
         if ((depInfo.isBefore(arrInfo)) && (price >= 0) && (seats >= 0) && (searchFlights(id) == -1)){
-            System.out.println("dfsfsdfsdfdfdsfsdfsdffsdfsd");
             String sDepInfo = depInfo.getYear() + "-" + depInfo.getMonthValue() + "-" + depInfo.getDayOfMonth() + "T"
                     + depInfo.getHour() + ":" + depInfo.getMinute();
             String sArrInfo = arrInfo.getYear() + "-" + arrInfo.getMonthValue() + "-" + arrInfo.getDayOfMonth() + "T"
