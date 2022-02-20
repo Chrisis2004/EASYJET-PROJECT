@@ -1,0 +1,178 @@
+@startuml
+class App
+{
+  +static Users.Pearson pearson
+  +static boolean fistActionDone;
+  +static void main(String[] args)
+  +static void application()
+}
+
+class Costumer
+{
+-IOFlights flightsManager;
+-IOAirports airportManager;
+-IOTickets ticketsManager;
+-getInputFromKeyboard input
++Costumer(String name, String surname, String mail, String password, String userType)
++void menuCostumer()
++void bookTicket(String flight) 
++void deleteTicket(String ticket)
++String printFlightForCostumer(String flight)
+}
+
+class IOFlight{
+-FileIO fileFlights;
+getInputFromKeyboard input = new getInputFromKeyboard();
++IOFlights()
++void printFlights()
++int searchFlights(String idFlight) 
++int searchFlights(String departure, String arrival)
++void modifyFlight() throws IOException 
++void delateFlight() throws IOException 
++void addFlight() throws IOException 
++void printAFlight() throws IOException 
++String[] searchFlightsCostumer(String departure, String arrival, String typeOfSearch)
++String printFlight(String[] flight)
++int getAvailableSeats(String id)
++void setAvailableSeats(String id, int availableSeats)
++String getFlight(String id)
+}
+
+class FileIO {
+  -File file
+  +int nLines
+  -String[] fileContent
+  +FileIO(String fileName)
+  +int findLineAmount()
+  +String readFromFile()
+  +int howManySplit(String separatorChar)
+  +String[][] readFromCSV(String separatorChar)
+  +void writeOnCSV(String[][] to Write, in nLines, int nSplits, String separatorChar)
+  +void delateFile()
+  +void writeOnCSVAddOnly(String[][] toWrite, int nLines, int nSplits, String separatorChar)
+  +int thereIsOnCSV(String toSearch, int splitToSearch)
+  +public boolean thereIsInLineCSV(String toSearch, int nLine, int splitToSearch)
+  +String getFromCSV (int nLine, int nSplit)
+  +void delateLineFromCSV(int nLineToDelate)
+}
+
+class getInputFromKeyboard{
+#ConsoleInput
++int getInt() 
++long getLong() 
++long getShort() 
++float getFloat() 
++double getDouble() 
++byte getByte() 
++boolean getBoolean() 
++String getString() 
++String getMail()
++void mailValidation(String mail)
++static boolean mailSyntaxCheck(String mail) 
++char getChar()
++String getPassword()
++void passwordValidation(String password)
++static boolean passwordSyntaxCheck(String password) 
++void clearConsole() 
++void printLogo() throws IOException 
++String passwordCripter(String passwordToHash, String salt)
++String getDataTime() 
++String printDataTime(String dataTime)
+}
+
+class IOAirport{
+-FileIO fileAirports
++IOAirports()
++String[] getAllAirports() 
++void addAirport(String airport)
++int verifyExisting(String airport)
++void delateAirport(String airport)
+}
+
+class IOTickets{
+-FileIO fileTickets;
+-FileIO fileFlights;
+-IOFlights flighManager;
+-getInputFromKeyboard input
++IOTickets() 
++String[][] getAllTickets() 
++void printAllTickets() 
++void addTicket(String idFlight, String userMail, int ticketsToBuy)
++boolean verifyExisting(String[] ticket, int nTicket)
++boolean verifyExisting(String id, String userMail, String nBought)
++void deleteTicket(String ticketToDelate) 
++String[] getBoughtTickets(String mail) 
++void printBoughtTickets(String mail) 
++String getFlightToPrint(String id)
++String printTicket(String ticket)
+}
+
+class IOUsers{
+-FileIO fileUsers;
+-getInputFromKeyboard input
++IOUsers()
++void stampaUsers()
++String[][] getUsers() 
++String getNameUser(int nLine)
++String getSurnameUser(int nLine) 
++String getMailUser(int nLine) 
++String getPasswordUser(int nLine)
++String getUserType(int nLine) 
++int verifyMailUser(String mail) 
++boolean verifyPasswordUser(String mail, String password)
++String verifyUserType(int nLine) 
++void changePasswordUser(int nLineUser, String oldPassword, String newPassword)
++void addUser(String name, String surname, String mail, String password, String userType)
++void changeUserType(int nLineUser, String userType)
+}
+
+class mailException
+{
+  +getInputFromKeyboard input
+  +mailException()
+  +void mailError(String mail)	
+}
+
+class passwordException
+{
+  +getInputFromKeyboard input
+  +passwordException()
+  +void passwordError(String password)	
+}
+
+class Pearson {
+  -String name
+  -String surname
+  -String mail
+  -String password
+  -String userType
+  +IOUsers usersManager
+  +Pearson()
+  +Pearson(String name, String surname, String mail, String password)
+  +String getName()
+  +String getSurname()
+  +String getMail()
+  +String getPassword()
+  +void setName(String name)
+  +void setSurname(String surname)
+  +void setMail(String mail)
+  +void setPassword(String password)
+  +String getUserType()
+  +void setUserType(String userType)
+  +void logIn()
+  +void logIn(String mail)
+  +void logIn(String mail, String password)
+  +void costumerRegistration()
+  +void verifyCredentials(String mail, String password)
+  +String toString()
+}
+
+class Administrator
+{
+-IOFlights flightsManager
++Administrator(String name, String surname, String mail, String password, String userType)
++void menuAdmin()
++void adminRegistration()
++String printFlightForAdmin(String flight)
+}
+@enduml

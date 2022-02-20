@@ -137,7 +137,7 @@ public class Costumer extends Pearson {
                 default:
             }
             System.out.print(
-                    "\nDo you need something again?\nIf you write \"yes\" you will return to the menu else write all other words for exit.");
+                    "\nDo you need something again?\nIf you write \"yes\" you will return to the menu else write all other words for exit.\nYour choose: ");
             String menuExit = input.getString();
             if (!menuExit.equals("yes"))
                 exitToMenu = true;

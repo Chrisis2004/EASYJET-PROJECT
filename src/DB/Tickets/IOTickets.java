@@ -35,7 +35,9 @@ public class IOTickets {
 
     public void addTicket(String idFlight, String userMail, int ticketsToBuy) throws IOException {
         int availableSeats = flighManager.getAvailableSeats(idFlight);
-        if (ticketsToBuy>availableSeats)
+        if (ticketsToBuy==0)
+        System.out.println("Sorry the booking was unsuccessful");
+        else if (ticketsToBuy>availableSeats)
             System.out.println("Our company disposes only " + availableSeats + " seats on this flight, sorry the booking was unsuccessful");
         else {
             flighManager.setAvailableSeats(idFlight, (availableSeats - ticketsToBuy));

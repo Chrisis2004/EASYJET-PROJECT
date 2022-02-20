@@ -1,4 +1,4 @@
-@startuml ciao
+@startuml
 actor User as Foo
 entity System as Foo2
 database DB as Foo3
