@@ -1,14 +1,19 @@
 @startuml
-!theme mars
-class IOFlights
-{
--FileIO fileFlights
+class IOFlight{
+-FileIO fileFlights;
+getInputFromKeyboard input = new getInputFromKeyboard();
 +IOFlights()
 +void printFlights()
-+int searchFlights(String idFlight)
-+int searchFlights(String departure , String arrival)
-+void modifyFlight()
-+void delateFlight()
-+void addFlight()
++int searchFlights(String idFlight) 
++int searchFlights(String departure, String arrival)
++void modifyFlight() throws IOException 
++void delateFlight() throws IOException 
++void addFlight() throws IOException 
++void printAFlight() throws IOException 
++String[] searchFlightsCostumer(String departure, String arrival, String typeOfSearch)
++String printFlight(String[] flight)
++int getAvailableSeats(String id)
++void setAvailableSeats(String id, int availableSeats)
++String getFlight(String id)
 }
 @enduml

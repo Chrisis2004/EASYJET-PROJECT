@@ -1,23 +1,25 @@
 @startuml
-!theme mars
-class getInputFromKeyboard
-{
+class getInputFromKeyboard{
 #ConsoleInput
-+getInputFromKeyboard()
-+int getInt()
-+long getLong()
-+double getDouble()
-+float getFloat()
-+boolean getBoolean()
-+byte getByte()
-+char getChar()
-+String getString()
++int getInt() 
++long getLong() 
++long getShort() 
++float getFloat() 
++double getDouble() 
++byte getByte() 
++boolean getBoolean() 
++String getString() 
 +String getMail()
 +void mailValidation(String mail)
-+boolean {static} mailSyntaxCheck(String mail)
++static boolean mailSyntaxCheck(String mail) 
++char getChar()
 +String getPassword()
 +void passwordValidation(String password)
-+boolean {static} passwordSyntaxCheck(String password)
-+void clearConsole()
++static boolean passwordSyntaxCheck(String password) 
++void clearConsole() 
++void printLogo() throws IOException 
++String passwordCripter(String passwordToHash, String salt)
++String getDataTime() 
++String printDataTime(String dataTime)
 }
 @enduml

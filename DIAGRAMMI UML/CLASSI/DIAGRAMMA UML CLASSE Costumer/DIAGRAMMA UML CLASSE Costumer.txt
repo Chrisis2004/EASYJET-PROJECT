@@ -1,7 +1,14 @@
 @startuml
-!theme mars
 class Costumer
 {
-  +Costumer(String name, String surname, String mail, String password, String userType)	
+-IOFlights flightsManager;
+-IOAirports airportManager;
+-IOTickets ticketsManager;
+-getInputFromKeyboard input
++Costumer(String name, String surname, String mail, String password, String userType)
++void menuCostumer()
++void bookTicket(String flight) 
++void deleteTicket(String ticket)
++String printFlightForCostumer(String flight)
 }
 @enduml

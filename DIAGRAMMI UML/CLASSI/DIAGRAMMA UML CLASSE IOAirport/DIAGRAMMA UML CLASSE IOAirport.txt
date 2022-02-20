@@ -1,0 +1,10 @@
+@startuml
+class IOAirport{
+-FileIO fileAirports
++IOAirports()
++String[] getAllAirports() 
++void addAirport(String airport)
++int verifyExisting(String airport)
++void delateAirport(String airport)
+}
+@enduml

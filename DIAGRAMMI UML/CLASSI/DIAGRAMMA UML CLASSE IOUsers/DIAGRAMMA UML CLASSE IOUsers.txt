@@ -1,19 +1,20 @@
 @startuml
-!theme mars
-class IOUsers
-{
+class IOUsers{
 -FileIO fileUsers;
+-getInputFromKeyboard input
 +IOUsers()
 +void stampaUsers()
-+String[][] getUsers()
++String[][] getUsers() 
 +String getNameUser(int nLine)
-+String getSurnameUser(int nLine)
-+String getMailUser(int nLine)
++String getSurnameUser(int nLine) 
++String getMailUser(int nLine) 
 +String getPasswordUser(int nLine)
-+int verifyMailUser(String mail)
++String getUserType(int nLine) 
++int verifyMailUser(String mail) 
 +boolean verifyPasswordUser(String mail, String password)
-+String verifyUserType(int nLine)
++String verifyUserType(int nLine) 
 +void changePasswordUser(int nLineUser, String oldPassword, String newPassword)
 +void addUser(String name, String surname, String mail, String password, String userType)
++void changeUserType(int nLineUser, String userType)
 }
 @enduml

@@ -1,5 +1,4 @@
 @startuml
-!theme mars
 class FileIO {
   -File file
   +int nLines

@@ -1,0 +1,19 @@
+@startuml
+class IOTickets{
+-FileIO fileTickets;
+-FileIO fileFlights;
+-IOFlights flighManager;
+-getInputFromKeyboard input
++IOTickets() 
++String[][] getAllTickets() 
++void printAllTickets() 
++void addTicket(String idFlight, String userMail, int ticketsToBuy)
++boolean verifyExisting(String[] ticket, int nTicket)
++boolean verifyExisting(String id, String userMail, String nBought)
++void deleteTicket(String ticketToDelate) 
++String[] getBoughtTickets(String mail) 
++void printBoughtTickets(String mail) 
++String getFlightToPrint(String id)
++String printTicket(String ticket)
+}
+@enduml
