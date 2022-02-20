@@ -192,16 +192,9 @@ public class IOFlights {
         double price = input.getDouble();
         System.out.println("Enter maximum tickets for the plane: ");
         int seats = input.getInt();
-        int aSeats = input.getInt();
+        int aSeats = seats;
 
-        if (depInfo.isBefore(arrInfo) && price >= 0 && seats >= 0 && searchFlights(id) == -1 && seats==aSeats){// stampa su file se la
-                                                                                                // partenza è prima di
-                                                                                                // arrivo, se il prezzo
-                                                                                                // e i biglietti sono
-                                                                                                // >=0 e se non si è
-                                                                                                // trovato all'interno
-                                                                                                // del file nessun volo
-                                                                                                // con lo stesso id
+        if ((depInfo.isBefore(arrInfo)) && (price >= 0) && (seats >= 0) && (searchFlights(id) == -1)){
             String sDepInfo = depInfo.getYear() + "-" + depInfo.getMonthValue() + "-" + depInfo.getDayOfMonth() + "T"
                     + depInfo.getHour() + ":" + depInfo.getMinute();
             String sArrInfo = arrInfo.getYear() + "-" + arrInfo.getMonthValue() + "-" + arrInfo.getDayOfMonth() + "T"

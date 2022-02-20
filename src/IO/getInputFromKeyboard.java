@@ -168,7 +168,7 @@ public class getInputFromKeyboard {
             mailToReturn = reader.readString();
             mailValidation(mailToReturn);
         } catch (mailException e) {
-            e.mailError(mailToReturn);
+            mailToReturn = e.mailError(mailToReturn);
         }
         return mailToReturn;
     }
