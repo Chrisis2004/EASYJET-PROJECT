@@ -195,6 +195,7 @@ public class IOFlights {
         int aSeats = seats;
 
         if ((depInfo.isBefore(arrInfo)) && (price >= 0) && (seats >= 0) && (searchFlights(id) == -1)){
+            System.out.println("dfsfsdfsdfdfdsfsdfsdffsdfsd");
             String sDepInfo = depInfo.getYear() + "-" + depInfo.getMonthValue() + "-" + depInfo.getDayOfMonth() + "T"
                     + depInfo.getHour() + ":" + depInfo.getMinute();
             String sArrInfo = arrInfo.getYear() + "-" + arrInfo.getMonthValue() + "-" + arrInfo.getDayOfMonth() + "T"
