@@ -1,0 +1,56 @@
+@startuml
+start
+:Choose how to search;
+if(Insert Departure and Arrival Airport) then (yes)
+if(Route found) then (yes)
+if(Do you want to book?) then (yes)
+:Insert number of tickets to book;
+if(Tickets are available) then (yes)
+:Congratulation, you've booked succesfully!;
+end
+
+else (no)
+:We're sorry, there hasn't tickets availability;
+end
+endif;
+
+else(no)
+:Return to the menu;
+end;
+endif;
+
+else(no)
+:We're sorry, that route isn't managed by our company yet;
+end
+endif;
+
+else(no)
+if(Insert Departure and Arrival Date and Time) then (yes)
+if(Route found) then (yes)
+if(Do you want to book?) then (yes)
+:Insert number of tickets to book;
+if(Tickets are available) then (yes)
+:Congratulation, you've booked succesfully!;
+end
+
+else (no)
+:We're sorry, there hasn't tickets availability;
+end
+endif;
+
+else(no)
+:Return to the menu;
+end;
+endif;
+
+else(no)
+:We're sorry, that route isn't managed by our company yet;
+end
+endif;
+
+else(no)
+:Return to the menu;
+end;
+endif;
+
+@enduml
