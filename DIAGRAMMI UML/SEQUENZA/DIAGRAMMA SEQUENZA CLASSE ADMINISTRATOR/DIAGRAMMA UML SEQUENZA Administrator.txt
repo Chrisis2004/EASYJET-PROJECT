@@ -9,65 +9,107 @@ Foo2 -> Foo3 : Read all flights
 Foo3 -> Foo2: Return all flights
 Foo2 -> Foo : Print on screen all flights
 
-==SEARCH A FLIGHT==
-alt Search with departure/arrival
-Foo -> Foo2 : Insert cities
-Foo2 -> Foo3: Check the data
-
-alt Data correct
-Foo3 -> Foo2: Return flights
-Foo2 -> Foo: Book one of the flight?
-
-alt Yes
-Foo2 -> Foo: Which one you want to book?
-Foo -> Foo2: Insert the flight to book
-Foo2 -> Foo3: Pass the information
-Foo3 -> Foo2: Return the information
+==MODIFY A FLIGHT==
+alt modify ID
+Foo -> Foo2 : Insert ID
+Foo2 -> Foo3: Modify ID
+Foo3 -> Foo2: Return results
 Foo2 -> Foo: Print on screen the results
 
-else No
-Foo2 -> Foo: Print on screen the default menu
-end
-
-else Data not found
-Foo3 -> Foo2: Data not found
-Foo2 -> Foo: Sorry, there isn't a route for these cities
-end
-
-else Search with Data and Time
-Foo -> Foo2 : Insert data and time of the flight
-Foo2 -> Foo3: Check the data
-
-alt Data correct
-Foo3 -> Foo2: Return flights
-Foo2 -> Foo: Book one of the flight?
-
-alt Yes
-Foo2 -> Foo: Which one you want to book?
-Foo -> Foo2: Insert the flight to book
-Foo2 -> Foo3: Pass the information
-Foo3 -> Foo2: Return the information
+else Modify Departure Airport
+Foo -> Foo2 : Insert airport
+Foo2 -> Foo3: Modify airport
+Foo3 -> Foo2: Return results
 Foo2 -> Foo: Print on screen the results
 
-else No
-Foo2 -> Foo: Print on screen the default menu
+else Modify Departure Date and Time
+Foo -> Foo2 : Insert departure date and time
+Foo2 -> Foo3: Modify departure date and time
+Foo3 -> Foo2: Return results
+Foo2 -> Foo: Print on screen the results
+
+else Modify Arrival Airport
+Foo -> Foo2 : Insert arrival airport
+Foo2 -> Foo3: Modify arrival airport
+Foo3 -> Foo2: Return results
+Foo2 -> Foo: Print on screen the results
+
+else Modify Arrival Date and Time
+Foo -> Foo2 : Insert arrival date and time
+Foo2 -> Foo3: Modify arrival date and time
+Foo3 -> Foo2: Return results
+Foo2 -> Foo: Print on screen the results
+
+else Modify Ticket Price
+Foo -> Foo2 : Insert ticket price
+Foo2 -> Foo3: Modify ticket price
+Foo3 -> Foo2: Return results
+Foo2 -> Foo: Print on screen the results
+
+else Modify Seats Available on the Plane
+Foo -> Foo2 : Insert seats available on the plane
+Foo2 -> Foo3: Modify seats available on the plane
+Foo3 -> Foo2: Return results
+Foo2 -> Foo: Print on screen the results
 end
 
-else Data not found
-Foo3 -> Foo2: Data not found
-Foo2 -> Foo: Sorry, there isn't a route for these dates and times
-end
-end
+== DELETE A FLIGHT==
+Foo -> Foo2 : Choose the flight to delete
+Foo2 -> Foo3 : Delete the flight
+Foo3 -> Foo2: Return the results
+Foo2 -> Foo : Print on screen the results
 
-== BOOKED FLIGHTS ==
-Foo -> Foo2 : View all booked flights
-Foo2 -> Foo3: Request the information
-Foo3 -> Foo2: Return the information
-Foo2 -> Foo: Print on screen the flights
-
-== CANCEL RESERVATION ==
-Foo -> Foo2 : Cancel a reservation (Insert data)
-Foo2 -> Foo3: Check the existence and request the elimination
+== ADD A FLIGHT==
+Foo -> Foo2 : Insert data of the flight
+Foo2 -> Foo3: Check the exception
+alt Data are correct
 Foo3 -> Foo2: Return the results
 Foo2 -> Foo: Print on screen the results
+else Data are not correct
+Foo2 -> Foo: Sorry, there's been an error
+end
+
+== REGISTER A NEW ADMINISTRATOR==
+Foo -> Foo2 : Insert data of the user
+Foo2 -> Foo3 : Check the exception
+alt User doesn't exist in the database
+Foo3 -> Foo2: Return the results
+Foo2 -> Foo : Print on screen the results
+else User already exists in the database
+Foo2 -> Foo: Sorry, there's been an error
+end
+
+== VIEW ALL SELLED TICKETS==
+Foo -> Foo2 : See all selled tickets
+Foo2 -> Foo3 : Read all selled tickets
+Foo3 -> Foo2: Return all selled tickets
+Foo2 -> Foo : Print on screen all selled tickets
+
+== READ ALL THE INFORMATION ABOUT A FLIGHT==
+alt Search with ID
+Foo -> Foo2 : Insert ID
+Foo2 -> Foo3: Check the data
+
+alt Data correct
+Foo3 -> Foo2: Return the flight
+Foo2 -> Foo: Print on screen the flight
+
+else Data not found
+Foo3 -> Foo2: Data not found
+Foo2 -> Foo: Sorry, there isn't a flight with this ID
+end
+
+else Search with Departure/Arrival
+Foo -> Foo2 : Insert Departur/Arrival of the flight
+Foo2 -> Foo3: Check the data
+
+alt Data correct
+Foo3 -> Foo2: Return the flight
+Foo2 -> Foo: Print on screen the flight
+
+else Data not found
+Foo3 -> Foo2: Data not found
+Foo2 -> Foo: Sorry, there isn't a flight with these cities
+end
+end
 @enduml
