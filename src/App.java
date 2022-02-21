@@ -48,5 +48,4 @@ public class App {
             System.out.println("Something was wrong sorry try to restart the application");
         }
     }
-
 }
