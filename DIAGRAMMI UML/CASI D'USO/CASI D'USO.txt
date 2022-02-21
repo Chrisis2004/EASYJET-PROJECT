@@ -1,48 +1,51 @@
 @startuml
 left to right direction
-actor Amministratore as Amministratore
+actor Admin as Amministratore
 actor Utente as Utente
 package EASYJET-PROJECT {
 usecase "Login" as L
-usecase "Gestire un volo" as M
-usecase "Visualizza Biglietti Comprati" as D
-Amministratore --D
-usecase "Inserire Codice del volo" as C
-D-->C #green;line.dashed;text:green : include 
-Amministratore -- M
-Amministratore -- L
-usecase "Elimina volo" as T
-M<--T #red;line.dashed;text:red : extend 
-usecase "Aggiungi volo" as A
-M<--A #red;line.dashed;text:red : extend 
-usecase "Modifica volo" as B
-M<--B #red;line.dashed;text:red : extend 
-usecase "Registrazione" as R
+usecase "Registrazione"as R
+usecase "Vedere tutti i voli" as VTV
+usecase "Modifica volo" as MV
+usecase "Aggiunta volo" as AV
+usecase "Elimina volo" as EV
+usecase "Registrazione nuovo amministratore" as RA
+usecase "Vedere tutti i biglietti acquistati" as VBA
+usecase "Leggere informazioni riguardanti un volo" as LV
+usecase "Cercare un volo" as CV 
+usecase "Acquistare un biglietto" as AB
+usecase "Cancella prenotazione di un volo" as CP
+usecase "Vedere le proprie prenotazioni" as BA
 
 
-usecase "Cerca volo" as CT
-usecase "Prenota Biglietto" as PB
-usecase "CompraBiglietto" as CB
-usecase "Visualizza Biglietti" as VB
-usecase "inserire Nome" as IN
-usecase "Inserire Cognome" as IC
-usecase "Inserire Email" as IE
+Amministratore -- VTV
+Amministratore -- MV
+Amministratore -- AV
+Amministratore -- EV
+Amministratore -- RA
+Amministratore -- VBA
+Amministratore -- LV
 
-Utente -- PB 
-PB --> CT #green;line.dashed;text:green : include 
-CB --> PB #red;line.dashed;text:red : extend 
+Utente -- VTV
+Utente -- CV
+Utente -- AB
+Utente -- CP
+Utente -- BA
+Utente -- R
+
+VTV --> L #green;line.dashed;text:green : include
+MV --> L #green;line.dashed;text:green : include
+AV --> L #green;line.dashed;text:green : include
+EV --> L #green;line.dashed;text:green : include
+RA --> L #green;line.dashed;text:green : include
+VBA --> L #green;line.dashed;text:green : include
+LV --> L #green;line.dashed;text:green : include
+AB --> L #green;line.dashed;text:green : include
+CP --> L #green;line.dashed;text:green : include
+BA --> L #green;line.dashed;text:green : include
+CV --> L #green;line.dashed;text:green : include
  
-
-
-
-usecase "Inserire Password" as IP
-R-->IN  #green;line.dashed;text:green : include 
-R-->IC #green;line.dashed;text:green : include 
-R-->IE #green;line.dashed;text:green : include 
-R-->IP #green;line.dashed;text:green : include 
-Utente--R
-Utente--L
-Utente -- VB
-
+CP <-- BA #red;line.dashed;text:red : extend
+AB <-- CV #red;line.dashed;text:red : extend
 }
 @enduml
