@@ -25,8 +25,7 @@ public class App {
         switch (choose) {
             case 1:
                 firstActionDone = pearson.logIn();
-                if (firstActionDone)
-                    application();
+                application();
                 break;
             case 2:
                 firstActionDone = pearson.costumerRegistration();
