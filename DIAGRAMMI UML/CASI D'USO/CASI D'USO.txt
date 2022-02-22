@@ -28,7 +28,6 @@ Amministratore -- LV
 
 Utente -- VTV
 Utente -- CV
-Utente -- AB
 Utente -- CP
 Utente -- BA
 Utente -- R
@@ -46,6 +45,6 @@ BA --> L #green;line.dashed;text:green : include
 CV --> L #green;line.dashed;text:green : include
  
 CP <-- BA #red;line.dashed;text:red : extend
-AB <-- CV #red;line.dashed;text:red : extend
+AB <-- CV #green;line.dashed;text:green : include
 }
 @enduml
